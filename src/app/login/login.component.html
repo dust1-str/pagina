@@ -43,5 +43,7 @@
         </div>
       </div>
       <button *ngIf="state" [disabled]="!code.valid" class="btn btn-primary" (click)="verifyCode($event)" style="margin-top: 20px;">Verificar</button>
+      <p>No tienes una cuenta? <a routerLink="/register">Crea una</a></p>
     </form>
+    
   </div>

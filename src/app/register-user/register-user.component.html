@@ -1,0 +1,54 @@
+<div class="login-container">
+    
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <h2>Crear cuenta</h2>
+
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input id="name" placeholder="Ingrese su nombre" formControlName="name">
+        <div *ngIf="registerForm.controls.name.errors?.['required'] && registerForm.controls.name.touched" class="error">
+            El nombre es requerido
+          </div>
+          <div *ngIf="registerForm.controls.name.errors?.['minlength']" class="error">
+            El nombre debe tener al menos 3 caracteres
+          </div>
+          <div *ngIf="registerForm.controls.name.errors?.['maxlength']" class="error">
+            El nombre debe tener menos de 15 caracteres
+          </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Ingrese su email" formControlName="email">
+        <div *ngIf="registerForm.controls.email.errors?.['required'] && registerForm.controls.email.touched" class="error">
+            El email es requerido
+          </div>
+          <div *ngIf="registerForm.controls.email.errors?.['email']" class="error">
+            Por favor, ingrese un email válido
+          </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input [type]="showPassword.value ? 'text' : 'password'" id="password" placeholder="Password" formControlName="password">
+        <div class="check">
+            <label><input type="checkbox" id="showPassword" [formControl]="showPassword"> Mostrar contraseña</label>
+        </div>
+        <div *ngIf="registerForm.controls.password.errors?.['required'] && registerForm.controls.password.touched" class="error">
+            La contraseña es requerida
+          </div>
+          <div *ngIf="registerForm.controls.password.errors?.['minlength']" class="error">
+            La contraseña debe tener al menos 8 caracteres
+          </div>
+          <div *ngIf="registerForm.controls.password.errors?.['maxlength']" class="error">
+            La contraseña debe tener al menos 12 caracteres
+          </div>
+      </div>
+  
+      <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Crear cuenta</button>
+      <!-- <div *ngIf="loginMessage" [class.message-success]="state" [class.message-error]="!state" class="message">
+        {{ loginMessage }}
+      </div> -->
+    </form>
+    
+  </div>

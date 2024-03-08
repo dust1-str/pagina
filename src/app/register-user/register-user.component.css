@@ -99,3 +99,10 @@
     font-size: 12px;
     text-align: center;
   }
+
+  .check {
+    display: flex;
+    justify-content: end;
+    margin-top: 5px;
+  }
+  
