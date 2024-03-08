@@ -22,9 +22,26 @@
           </div>
       </div>
   
-      <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Iniciar sesión</button>
+      <button *ngIf="!state" type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Iniciar sesión</button>
       <div *ngIf="loginMessage" [class.message-success]="state" [class.message-error]="!state" class="message">
         {{ loginMessage }}
       </div>
+      <div class="verification-container" *ngIf="state">
+        <label class="verification-label">Se ha enviado un codigo de verificación a tu correo</label>
+        <div class="form-group">
+          <label class="verification-code-label">Código de verificación</label>
+          <input type="text" id="verificationCode" placeholder="Ingrese su código de verificación" class="verification-input" [formControl]="code" maxlength="6">
+          <div *ngIf="code.errors?.['required'] && code.touched" class="error-message">
+              El código es requerido
+          </div>
+          <div *ngIf="code.errors?.['minlength']" class="error-message">
+            El código debe tener 6 caracteres
+        </div>
+        </div>
+        <div *ngIf="authMessage" [class.message-success]="activate" [class.message-error]="!activate" class="message">
+          {{ authMessage }}
+        </div>
+      </div>
+      <button *ngIf="state" [disabled]="!code.valid" class="btn btn-primary" (click)="verifyCode($event)" style="margin-top: 20px;">Verificar</button>
     </form>
   </div>

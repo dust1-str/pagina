@@ -75,3 +75,21 @@
     margin-left: 1px;
     font-size: 12px;
   }
+
+  .verification-container {
+    margin-top: 10px;
+  }
+  
+  .verification-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .verification-input {
+    margin-bottom: 3px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 15px;
+  }
