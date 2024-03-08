@@ -42,8 +42,12 @@ export class LoginComponent {
           console.log(data);
         },
         error: error => {
-          console.log(error.error.message);
-          this.loginMessage = 'Error. Verifica tus credenciales.'
+          console.log(error.error.error);
+          if (error.error.error === 'Unauthorized') {
+            this.loginMessage = 'Error. Verifica tus credenciales.'
+          } else if (error.error.error === 'Email not verified') {
+            this.loginMessage = 'Verifica tu correo para poder iniciar sesión.'
+          }
           this.state = false;
         }
     });

@@ -45,10 +45,15 @@
           </div>
       </div>
   
-      <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Crear cuenta</button>
-      <!-- <div *ngIf="loginMessage" [class.message-success]="state" [class.message-error]="!state" class="message">
-        {{ loginMessage }}
-      </div> -->
+      <button *ngIf="!successMessage" type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Crear cuenta</button>
+      <div *ngIf="errorMessage" [class.message-success]="success" [class.message-error]="!success" class="message">
+        El correo ya está registrado
+      </div>
+      <div *ngIf="successMessage" [class.message-success]="success" [class.message-error]="!success" class="message">
+        {{successMessage}}
+      </div>
+      <button *ngIf="successMessage" class="btn btn-primary" (click)="goLogin($event)" style="margin-top: 20px;">Iniciar sesión</button>
+      <p>Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a></p>
     </form>
     
   </div>
