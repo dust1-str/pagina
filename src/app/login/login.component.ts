@@ -20,6 +20,7 @@ export class LoginComponent {
   authMessage: string = '';
   state: boolean = false;
   activate: boolean = false;
+  role_id: number = 0;
   token: string = '';
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,14 +40,13 @@ export class LoginComponent {
           this.auth(email);
           this.state = true;
           this.token = data.access_token;
-          console.log(data);
+          this.role_id = data.role_id;
+          console.log(this.role_id);
         },
         error: error => {
           console.log(error.error.error);
           if (error.error.error === 'Unauthorized') {
             this.loginMessage = 'Error. Verifica tus credenciales.'
-          } else if (error.error.error === 'Email not verified') {
-            this.loginMessage = 'Verifica tu correo para poder iniciar sesión.'
           }
           this.state = false;
         }
@@ -77,6 +77,7 @@ export class LoginComponent {
       this.activate = true;
       this.authMessage = 'Código correcto. Redirigiendo...';
       localStorage.setItem('token', this.token);
+      localStorage.setItem('role_id', this.role_id.toString());
       setTimeout(() => {
         this.router.navigate(['/home']);
       }, 1500);
