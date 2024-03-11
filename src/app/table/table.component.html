@@ -1,0 +1,17 @@
+<table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th *ngFor="let columna of columnas">{{ columna }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let elemento of elementos">
+        <td *ngFor="let columna of columnas">{{ elemento[columna] }}</td>
+        <td>
+          <button (click)="emitirEditar(elemento.id)">Editar</button>
+          <button (click)="emitirEliminar(elemento.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
