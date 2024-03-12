@@ -1,9 +1,7 @@
 <div class="container">
 
     <div class="dashboard-container2">
-    
-        <app-dashboard></app-dashboard>
-  
+      
     </div>
     <div>
         <app-table [elementos]="elementos" [columnas]="columnas" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)" (agregar)="agregarElemento($event)"></app-table>
