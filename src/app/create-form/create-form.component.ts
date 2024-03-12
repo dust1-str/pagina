@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ServiceFactoryService } from '../Core/Services/service-factory.service';
 import { Router } from '@angular/router';
+import { CrudService } from '../Core/Services/crud.service';
 
 @Component({
   selector: 'app-create-form',
@@ -16,10 +16,11 @@ export class CreateFormComponent {
   @Input() fields: any[] = [];
   @Input() elemento: any;
   @Input() backRoute: string = '';
+  @Input() endpoint: string = '';
 
   createForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private serviceFactory: ServiceFactoryService, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private crud: CrudService) { }
 
   ngOnInit() {
     this.createForm = this.fb.group(
@@ -31,12 +32,7 @@ export class CreateFormComponent {
   }
 
   create() {
-    let service;
-    if (this.elemento == 'paises'){
-      service = this.serviceFactory.getPaisesService();
-    }
-
-    service?.create(this.createForm.value.Nombre).subscribe({
+    this.crud.create(this.endpoint, this.createForm.value.Nombre).subscribe({
       next: (data) => {
         console.log(data);
         this.router.navigate(['/' + this.backRoute]);

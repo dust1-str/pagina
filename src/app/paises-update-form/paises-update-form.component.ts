@@ -18,6 +18,7 @@ export class PaisesUpdateFormComponent {
   elemento = 'paises';
   id: string | null = '';
   backRoute = '/paises';
+  endpoint = '/paises/'
 
   constructor(private route: ActivatedRoute) { }
 

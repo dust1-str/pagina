@@ -16,4 +16,5 @@ export class PaisesCreateFormComponent {
   ];
   elemento = 'paises';
   backRoute = '/paises';
+  endpoint = '/paises';
 }

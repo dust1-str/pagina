@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ServiceFactoryService } from '../Core/Services/service-factory.service';
+import { CrudService } from '../Core/Services/crud.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,10 +17,11 @@ export class UpdateFormComponent {
   @Input() elemento: any;
   @Input() id: any;
   @Input() backRoute: string = '';
+  @Input() endpoint: string = '';
 
   updateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private serviceFactory: ServiceFactoryService, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private crud: CrudService) { }
 
   ngOnInit() {
     console.log(this.id);
@@ -33,12 +34,7 @@ export class UpdateFormComponent {
   }
 
   update() {
-    let service;
-    if (this.elemento == 'paises'){
-      service = this.serviceFactory.getPaisesService();
-    }
-
-    service?.update(this.id, this.updateForm.value.Nombre).subscribe({
+    this.crud.update(this.endpoint, this.id, this.updateForm.value.Nombre).subscribe({
       next: (data) => {
         console.log(data);
         this.router.navigate(['/' + this.backRoute]);
