@@ -1,0 +1,17 @@
+<form [formGroup]="updateForm" (ngSubmit)="update()">
+    <div *ngFor="let field of fields" class="form-group">
+      <label [for]="field.name">{{ field.label }}</label>
+      <input [id]="field.name" [type]="field.type" [formControlName]="field.name" [placeholder]="field.label">
+      
+      <!-- Mensajes de error -->
+      <div *ngIf="updateForm.get(field.name)?.invalid">
+        <small class="text-danger" *ngIf="updateForm.get(field.name)?.errors?.['required'] && updateForm.get(field.name)?.touched">
+          Este campo es requerido.
+        </small>
+        <small class="text-danger" *ngIf="updateForm.get(field.name)?.errors?.['minlength']">
+            Este campo requiere al menos 8 caracteres.
+          </small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!updateForm.valid">Submit</button>
+  </form>
