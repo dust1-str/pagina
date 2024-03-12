@@ -2,12 +2,12 @@
 
 .container {
   display: flex;
-  flex-direction: column; /* Cambia la dirección de la distribución a vertical */
+  flex-direction: row; /* Cambia la dirección de la distribución a vertical */
   height: 100vh; /* El 100% de la altura de la ventana */
 }
 
 .dashboard-container2 {
-  height: auto; /* Establece la altura automática para que se ajuste al contenido */
+  height: 100%; /* Establece la altura automática para que se ajuste al contenido */
 }
 
 .menu-container {
