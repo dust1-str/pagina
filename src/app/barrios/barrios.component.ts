@@ -15,6 +15,10 @@ import { CommonModule } from '@angular/common';
 export class BarriosComponent implements OnInit {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Distrito']; 
+  updateRoute: string = '/barrios/update/';
+  createRoute: string = '/barrios/create';
+  deleteRoute: string = '/barrios/';
+  backRoute: string = '/barrios';
 
   constructor(private barriosService: BarriosService) { }
 

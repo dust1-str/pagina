@@ -1,0 +1,30 @@
+<div class="login-container">
+    
+    <form [formGroup]="barrioForm" (ngSubmit)="create()" class="form-container">
+      <h2 class="form-title">Crear barrio</h2>
+  
+      <div class="form-group">
+        <label for="Nombre" class="form-label">Nombre del barrio</label>
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
+        <div *ngIf="barrioForm.controls.Nombre.errors?.['required'] && barrioForm.controls.Nombre.touched" class="error">
+            El barrio es requerido
+        </div>
+        <div *ngIf="barrioForm.controls.Nombre.errors?.['minlength']" class="error">
+            El barrio debe tener al menos 3 caracteres
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="DistritoID" class="form-label">Ciudad</label>
+        <select id="DistritoID" formControlName="DistritoID" class="form-input">
+            <option *ngFor="let distrito of distritos" [value]="distrito.id">{{distrito.Nombre}}</option>
+        </select>
+        <div *ngIf="barrioForm.controls.DistritoID.errors?.['required'] && barrioForm.controls.DistritoID.touched" class="error">
+            El distrito es requerido
+        </div>
+    </div>
+  
+      <button type="submit" [disabled]="!barrioForm.valid" class="btn btn-primary form-button">Crear barrio</button>
+    </form>
+    
+</div>
