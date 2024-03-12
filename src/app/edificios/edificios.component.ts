@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class EdificiosComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre','CalleID']; 
+  columnas: string[] = ['id', 'Nombre','Calle']; 
 
   constructor(private edificiosService: EdificiosService) { }
 

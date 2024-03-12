@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class BarriosComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre', 'DistritoID']; 
+  columnas: string[] = ['id', 'Nombre', 'Distrito']; 
 
   constructor(private barriosService: BarriosService) { }
 

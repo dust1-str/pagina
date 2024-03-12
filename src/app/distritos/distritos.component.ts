@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DistritosComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre', 'CiudadID']; 
+  columnas: string[] = ['id', 'Nombre', 'Ciudad']; 
 
   constructor(private distritosService: DistritosService) { }
 
