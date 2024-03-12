@@ -1,7 +1,7 @@
-<form [formGroup]="updateForm" (ngSubmit)="update()">
+<form [formGroup]="updateForm" (ngSubmit)="update()" class="form-container">
     <div *ngFor="let field of fields" class="form-group">
-      <label [for]="field.name">{{ field.label }}</label>
-      <input [id]="field.name" [type]="field.type" [formControlName]="field.name" [placeholder]="field.label">
+      <label [for]="field.name" class="form-label">{{ field.label }}</label>
+      <input [id]="field.name" [type]="field.type" [formControlName]="field.name" [placeholder]="field.label" class="form-input">
       
       <!-- Mensajes de error -->
       <div *ngIf="updateForm.get(field.name)?.invalid">
@@ -10,8 +10,8 @@
         </small>
         <small class="text-danger" *ngIf="updateForm.get(field.name)?.errors?.['minlength']">
             Este campo requiere al menos 8 caracteres.
-          </small>
+        </small>
       </div>
     </div>
-    <button type="submit" [disabled]="!updateForm.valid">Submit</button>
-  </form>
+    <button type="submit" [disabled]="!updateForm.valid" class="btn btn-primary form-button">Submit</button>
+</form>

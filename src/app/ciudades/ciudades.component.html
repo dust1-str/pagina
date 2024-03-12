@@ -5,7 +5,7 @@
   
     </div>
     <div>
-        <app-table [elementos]="elementos" [columnas]="columnas" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)" (agregar)="agregarElemento($event)"></app-table>
+        <app-table [elementos]="elementos" [columnas]="columnas" [createRoute]="createRoute" [updateRoute]="updateRoute" [deleteRoute]="deleteRoute" [backRoute]="backRoute" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)" (agregar)="agregarElemento($event)"></app-table>
     </div>
   
   </div>

@@ -1,0 +1,30 @@
+<div class="login-container">
+    
+    <form [formGroup]="ciudadForm" (ngSubmit)="update()" class="form-container">
+      <h2 class="form-title">Crear ciudad</h2>
+  
+      <div class="form-group">
+        <label for="Nombre" class="form-label">Nombre de la ciudad</label>
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
+        <div *ngIf="ciudadForm.controls.Nombre.errors?.['required'] && ciudadForm.controls.Nombre.touched" class="error">
+            La ciudad es requerida
+        </div>
+        <div *ngIf="ciudadForm.controls.Nombre.errors?.['minlength']" class="error">
+            La ciudad debe tener al menos 3 caracteres
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="RegionID" class="form-label">Region</label>
+        <select id="RegionID" formControlName="RegionID" class="form-input">
+            <option *ngFor="let region of regiones" [value]="region.id">{{region.Nombre}}</option>
+        </select>
+        <div *ngIf="ciudadForm.controls.RegionID.errors?.['required'] && ciudadForm.controls.RegionID.touched" class="error">
+            La región es requerida
+        </div>
+    </div>
+  
+      <button type="submit" [disabled]="!ciudadForm.valid" class="btn btn-primary form-button">Actualizar ciudad</button>
+    </form>
+    
+</div>
