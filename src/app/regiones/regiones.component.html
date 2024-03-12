@@ -1,11 +1,1 @@
-<div class="container">
-
-    <div class="dashboard-container2">
-    
-  
-    </div>
-    <div>
-        <app-table [elementos]="elementos" [columnas]="columnas" [createRoute]="createRoute" [updateRoute]="updateRoute" [deleteRoute]="deleteRoute" [backRoute]="backRoute" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)" (agregar)="agregarElemento($event)"></app-table>
-    </div>
-  
-  </div>
+<app-table [elementos]="elementos" [columnas]="columnas" [createRoute]="createRoute" [updateRoute]="updateRoute" [deleteRoute]="deleteRoute" [backRoute]="backRoute" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)" (agregar)="agregarElemento($event)"></app-table>
