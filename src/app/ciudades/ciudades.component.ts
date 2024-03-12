@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 export class CiudadesComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre', 'RegionID']; 
+  columnas: string[] = ['id', 'Nombre', 'Region']; 
 
   constructor(private ciudadesService: CiudadesService) { }
 

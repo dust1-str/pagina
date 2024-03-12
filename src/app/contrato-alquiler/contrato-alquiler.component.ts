@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ContratoAlquilerComponent implements OnInit{
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Fecha_Inicio', 'Fecha_Final', 'InquilinoID', 'ApartamentoID','Monto']; 
+  columnas: string[] = ['id', 'Fecha_Inicio', 'Fecha_Final', 'Inquilino', 'Apartamento','Monto']; 
 
   constructor(private contratoAlquilerService: ContratoAlquilerService) { }
 
