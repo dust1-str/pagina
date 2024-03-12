@@ -38,9 +38,26 @@ export class CrudService {
     return this.http.post<any>(url, { Nombre, PaisID });
   }
 
+  createCiudad(Nombre: string, RegionIDstring: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/ciudades'
+    const RegionID = parseInt(RegionIDstring, 10);
+    return this.http.post<any>(url, { Nombre, RegionID });
+  }
+
   updateRegion(Nombre: string, PaisIDstring: string, id: number): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/regiones/' + id;
     const PaisID = parseInt(PaisIDstring, 10);
     return this.http.put<any>(url, { Nombre, PaisID });
+  }
+
+  updateCiudad(Nombre: string, RegionIDstring: string, id: number): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/ciudades/' + id;
+    const RegionID = parseInt(RegionIDstring, 10);
+    return this.http.put<any>(url, { Nombre, RegionID });
+  }
+
+  getRegiones(): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/regiones';
+    return this.http.get<any>(url);
   }
 }

@@ -16,6 +16,10 @@ import { CommonModule } from '@angular/common';
 export class CiudadesComponent implements OnInit {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Region']; 
+  updateRoute: string = '/ciudades/update/';
+  createRoute: string = '/ciudades/create';
+  deleteRoute: string = '/ciudades/';
+  backRoute: string = '/ciudades';
 
   constructor(private ciudadesService: CiudadesService) { }
 
