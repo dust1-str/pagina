@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
       <tr>
@@ -8,9 +10,14 @@
     <tbody class="bg-white divide-y divide-gray-200">
       <tr *ngFor="let elemento of elementos">
         <td *ngFor="let columna of columnas">{{ elemento[columna] }}</td>
-        <td>
-          <button (click)="emitirEditar(elemento.id)">Editar</button>
-          <button (click)="emitirEliminar(elemento.id)">Eliminar</button>
+        <td style="display: flex; justify-content: space-between;">
+          <button class="edit" (click)="emitirEditar(elemento.id)">Editar</button>
+          <button class="delete" (click)="emitirEliminar(elemento.id)">Eliminar</button>
+        </td>
+      </tr>
+      <tr>
+        <td [attr.colspan]="columnas.length + 1" style="text-align: center;">
+          <button class="add" (click)="emitirAgregar()"><i class="fa-solid fa-plus"></i></button>
         </td>
       </tr>
     </tbody>

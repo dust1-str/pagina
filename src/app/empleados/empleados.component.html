@@ -1,8 +1,12 @@
-<div style="display: flex; align-items: center; justify-content: center;">
-    <div>
-      <h2 class="text-3xl font-bold text-center mt-8 mb-4 text-black-700 underline" style="font-style:italic;">Listado de Empleados</h2>
-      <div class="text-center">
-        <app-table [elementos]="elementos" [columnas]="columnas" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)"></app-table>
-      </div>
-    </div>
+<div class="container">
+
+  <div class="dashboard-container2">
+  
+      <app-dashboard></app-dashboard>
+
   </div>
+  <div>
+      <app-table [elementos]="elementos" [columnas]="columnas" (eliminar)="eliminarElemento($event)" (editar)="editarElemento($event)" (agregar)="agregarElemento($event)"></app-table>
+  </div>
+
+</div>

@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpleadoService } from '../Core/Services/empleado.service';
+import { RegionService } from '../Core/Services/region.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
-
 @Component({
-  selector: 'app-empleados',
+  selector: 'app-regiones',
   standalone: true,
   imports: [TableComponent,CommonModule,DashboardComponent],
-  templateUrl: './empleados.component.html',
-  styleUrls: ['./empleados.component.css']
+  templateUrl: './regiones.component.html',
+  styleUrl: './regiones.component.css'
 })
-export class EmpleadosComponent implements OnInit {
+export class RegionesComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre']; 
+  columnas: string[] = ['id', 'Nombre','PaisID']; 
 
-  constructor(private empleadoService: EmpleadoService) { }
+  constructor(private regionService: RegionService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -24,12 +23,12 @@ export class EmpleadosComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.empleadoService.obtenerEmpleados().subscribe(
+    this.regionService.obtenerElemento().subscribe(
       data => {
         this.elementos = data;
       },
       error => {
-        console.error('Error al obtener empleados', error);
+        console.error('Error al obtener regiones', error);
       }
     );
   }
@@ -41,7 +40,7 @@ export class EmpleadosComponent implements OnInit {
   eliminarElemento(id: number) {
     console.log('Eliminar elemento con ID:', id);
   }
-
+  
   agregarElemento(id: number) {
     console.log('se agregara un nuevo elemento ');
   }

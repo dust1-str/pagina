@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpleadoService } from '../Core/Services/empleado.service';
+import { ApartamentosService } from '../Core/Services/apartamentos.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
-
 @Component({
-  selector: 'app-empleados',
+  selector: 'app-apartamentos',
   standalone: true,
   imports: [TableComponent,CommonModule,DashboardComponent],
-  templateUrl: './empleados.component.html',
-  styleUrls: ['./empleados.component.css']
+  templateUrl: './apartamentos.component.html',
+  styleUrl: './apartamentos.component.css'
 })
-export class EmpleadosComponent implements OnInit {
+export class ApartamentosComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre']; 
+  columnas: string[] = ['id', 'Nombre', 'Descripcion', 'EdificioID', 'EstadoID']; 
 
-  constructor(private empleadoService: EmpleadoService) { }
+  constructor(private apartamentosService: ApartamentosService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -24,12 +23,12 @@ export class EmpleadosComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.empleadoService.obtenerEmpleados().subscribe(
+    this.apartamentosService.obtenerElemento().subscribe(
       data => {
         this.elementos = data;
       },
       error => {
-        console.error('Error al obtener empleados', error);
+        console.error('Error al obtener elementos', error);
       }
     );
   }
@@ -40,8 +39,8 @@ export class EmpleadosComponent implements OnInit {
 
   eliminarElemento(id: number) {
     console.log('Eliminar elemento con ID:', id);
-  }
-
+  }    
+  
   agregarElemento(id: number) {
     console.log('se agregara un nuevo elemento ');
   }

@@ -21,6 +21,7 @@ export class TableComponent {
   @Input() columnas: string[] = [];
   @Output() editar = new EventEmitter<number>();
   @Output() eliminar = new EventEmitter<number>();
+  @Output() agregar = new EventEmitter();
 
   emitirEditar(id: number) {
     this.editar.emit(id);
@@ -28,5 +29,9 @@ export class TableComponent {
 
   emitirEliminar(id: number) {
     this.eliminar.emit(id);
+  }
+
+  emitirAgregar() {
+    this.agregar.emit();
   }
 }

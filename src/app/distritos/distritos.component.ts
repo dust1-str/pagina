@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpleadoService } from '../Core/Services/empleado.service';
+import { DistritosService } from '../Core/Services/distritos.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-empleados',
+  selector: 'app-distritos',
   standalone: true,
   imports: [TableComponent,CommonModule,DashboardComponent],
-  templateUrl: './empleados.component.html',
-  styleUrls: ['./empleados.component.css']
+  templateUrl: './distritos.component.html',
+  styleUrl: './distritos.component.css'
 })
-export class EmpleadosComponent implements OnInit {
+export class DistritosComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre']; 
+  columnas: string[] = ['id', 'Nombre', 'CiudadID']; 
 
-  constructor(private empleadoService: EmpleadoService) { }
+  constructor(private distritosService: DistritosService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
@@ -24,12 +24,12 @@ export class EmpleadosComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.empleadoService.obtenerEmpleados().subscribe(
+    this.distritosService.obtenerElemento().subscribe(
       data => {
         this.elementos = data;
       },
       error => {
-        console.error('Error al obtener empleados', error);
+        console.error('Error al obtener elementos', error);
       }
     );
   }
