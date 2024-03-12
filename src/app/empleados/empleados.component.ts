@@ -14,7 +14,11 @@ import { CommonModule } from '@angular/common';
 })
 export class EmpleadosComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre']; 
+  columnas: string[] = ['id', 'Nombre'];
+  updateRoute: string = '/paises/update/';
+  createRoute: string = '/paises/create'; 
+  deleteRoute: string = '/paises/';
+  backRoute: string = '/paises';
 
   constructor(private empleadoService: EmpleadoService) { }
 

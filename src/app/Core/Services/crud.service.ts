@@ -19,4 +19,9 @@ export class CrudService {
     const fullUrl = 'http://127.0.0.1:8000/api/auth' + endpoint
     return this.http.post<any>(fullUrl, { Nombre });
   }
+  
+  eliminar(endpoint: string, id: number): Observable<any> {
+    const fullUrl = 'http://127.0.0.1:8000/api/auth' + endpoint + id;
+    return this.http.delete<any>(fullUrl);
+  }
 }
