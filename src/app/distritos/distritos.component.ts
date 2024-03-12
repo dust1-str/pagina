@@ -15,6 +15,10 @@ import { CommonModule } from '@angular/common';
 export class DistritosComponent implements OnInit {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Ciudad']; 
+  updateRoute: string = '/distritos/update/';
+  createRoute: string = '/distritos/create';
+  deleteRoute: string = '/distritos/';
+  backRoute: string = '/distritos';
 
   constructor(private distritosService: DistritosService) { }
 

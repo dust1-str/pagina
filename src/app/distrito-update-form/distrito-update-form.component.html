@@ -1,0 +1,31 @@
+<div class="login-container">
+    
+    <form [formGroup]="distritoForm" (ngSubmit)="update()" class="form-container">
+      <h2 class="form-title">Actualizar distrito</h2>
+  
+      <div class="form-group">
+        <label for="Nombre" class="form-label">Nombre del distrito</label>
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
+        <div *ngIf="distritoForm.controls.Nombre.errors?.['required'] && distritoForm.controls.Nombre.touched" class="error">
+            El distrito es requerido
+        </div>
+        <div *ngIf="distritoForm.controls.Nombre.errors?.['minlength']" class="error">
+            El distrito debe tener al menos 3 caracteres
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="CiudadID" class="form-label">Ciudad</label>
+        <select id="CiudadID" formControlName="CiudadID" class="form-input">
+            <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ciudad.Nombre}}</option>
+        </select>
+        <div *ngIf="distritoForm.controls.CiudadID.errors?.['required'] && distritoForm.controls.CiudadID.touched" class="error">
+            La ciudad es requerida
+        </div>
+    </div>
+  
+      <button type="submit" [disabled]="!distritoForm.valid" class="btn btn-primary form-button">Actualizar distrito</button>
+    </form>
+    
+</div>
+

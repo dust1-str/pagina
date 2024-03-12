@@ -16,6 +16,8 @@ export const routes: Routes = [
     { path: 'ciudades/create', loadComponent:()=>import('./ciudades-create-form/ciudades-create-form.component').then(m=>m.CiudadesCreateFormComponent), canActivate: [authGuard]},
     { path: 'ciudades/update/:id', loadComponent:()=>import('./ciudades-update-form/ciudades-update-form.component').then(m=>m.CiudadesUpdateFormComponent), canActivate: [authGuard]},
     { path: 'distritos', loadComponent:()=>import('./distritos/distritos.component').then(m=>m.DistritosComponent), canActivate: [authGuard]},
+    { path: 'distritos/create', loadComponent:()=>import('./distrito-create-form/distrito-create-form.component').then(m=>m.DistritoCreateFormComponent), canActivate: [authGuard]},
+    { path: 'distritos/update/:id', loadComponent:()=>import('./distrito-update-form/distrito-update-form.component').then(m=>m.DistritoUpdateFormComponent), canActivate: [authGuard]},
     { path: 'barrios', loadComponent:()=>import('./barrios/barrios.component').then(m=>m.BarriosComponent), canActivate: [authGuard]},
     { path: 'calles', loadComponent:()=>import('./calles/calles.component').then(m=>m.CallesComponent), canActivate: [authGuard]},
     { path: 'edificios', loadComponent:()=>import('./edificios/edificios.component').then(m=>m.EdificiosComponent), canActivate: [authGuard]},
