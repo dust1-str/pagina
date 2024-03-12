@@ -1,10 +1,9 @@
 <div class="container">
-
-    <div class="dashboard-container2">
+    <div *ngIf="authStatus == true" class="dashboard-container2">
         <app-dashboard></app-dashboard>
     </div>
-    <div class="menu-container">
+
+    <div class="menu-container" >
         <router-outlet></router-outlet>
     </div>
-
 </div>

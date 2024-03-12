@@ -1,14 +1,15 @@
 /* home.component.css */
 
 .container {
-    display: flex;
-    height: 100vh; /* El 100% de la altura de la ventana */
+  display: flex;
+  flex-direction: column; /* Cambia la dirección de la distribución a vertical */
+  height: 100vh; /* El 100% de la altura de la ventana */
 }
-
-
-
 
 .dashboard-container2 {
-  height: 100%; /* Ajusta esto según tus necesidades */
+  height: auto; /* Establece la altura automática para que se ajuste al contenido */
 }
 
+.menu-container {
+  flex-grow: 1; /* Permite que este contenedor crezca para ocupar el espacio restante */
+}
