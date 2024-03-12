@@ -13,7 +13,11 @@ import { CommonModule } from '@angular/common';
 })
 export class RegionesComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre','PaisID']; 
+  columnas: string[] = ['id', 'Nombre','PaisID'];
+  updateRoute: string = '/regiones/update/';
+  createRoute: string = '/regiones/create'; 
+  deleteRoute: string = '/regiones/';
+  backRoute: string = '/regiones'; 
 
   constructor(private regionService: RegionService) { }
 
