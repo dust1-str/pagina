@@ -1,0 +1,31 @@
+<div class="login-container">
+    
+    <form [formGroup]="regionForm" (ngSubmit)="update()">
+      <h2>Actualizar región</h2>
+  
+      <div class="form-group">
+        <label for="Nombre">Nombre de la region</label>
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre">
+        <div *ngIf="regionForm.controls.Nombre.errors?.['required'] && regionForm.controls.Nombre.touched" class="error">
+            La región es requerida
+          </div>
+          <div *ngIf="regionForm.controls.Nombre.errors?.['minlength']" class="error">
+            La region debe tener al menos 3 caracteres
+          </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="PaisID">Pais</label>
+        <select id="PaisID" formControlName="PaisID">
+            <option *ngFor="let pais of paises" [value]="pais.id">{{pais.Nombre}}</option>
+        </select>
+        <div *ngIf="regionForm.controls.PaisID.errors?.['required'] && regionForm.controls.PaisID.touched" class="error">
+            El pais es requerido
+        </div>
+    </div>
+  
+      <button type="submit" [disabled]="!regionForm.valid" class="btn btn-primary">Actualizar region</button>
+    </form>
+    
+  </div>
+

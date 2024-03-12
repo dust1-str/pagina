@@ -10,6 +10,8 @@ export const routes: Routes = [
     { path: 'paises/update/:id' , loadComponent:()=>import('./paises-update-form/paises-update-form.component').then(m=>m.PaisesUpdateFormComponent), canActivate: [authGuard]},
     { path: 'paises/create' , loadComponent:()=>import('./paises-create-form/paises-create-form.component').then(m=>m.PaisesCreateFormComponent), canActivate: [authGuard]},
     { path: 'regiones', loadComponent:()=>import('./regiones/regiones.component').then(m=>m.RegionesComponent), canActivate: [authGuard]},
+    { path: 'regiones/create', loadComponent:()=>import('./regiones-create-form/regiones-create-form.component').then(m=>m.RegionesCreateFormComponent), canActivate: [authGuard]},
+    { path: 'regiones/update/:id', loadComponent:()=>import('./regiones-update-form/regiones-update-form.component').then(m=>m.RegionesUpdateFormComponent), canActivate: [authGuard]},
     { path: 'ciudades', loadComponent:()=>import('./ciudades/ciudades.component').then(m=>m.CiudadesComponent), canActivate: [authGuard]},
     { path: 'distritos', loadComponent:()=>import('./distritos/distritos.component').then(m=>m.DistritosComponent), canActivate: [authGuard]},
     { path: 'barrios', loadComponent:()=>import('./barrios/barrios.component').then(m=>m.BarriosComponent), canActivate: [authGuard]},
