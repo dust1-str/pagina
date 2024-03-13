@@ -18,11 +18,14 @@ export class RegionesComponent implements OnInit {
   createRoute: string = '/regiones/create'; 
   deleteRoute: string = '/regiones/';
   backRoute: string = '/regiones';  
+  rol_user: string = "3";
 
   constructor(private regionService: RegionService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
+
   }
 
   actualizarElementos() {

@@ -19,11 +19,13 @@ export class DistritosComponent implements OnInit {
   createRoute: string = '/distritos/create';
   deleteRoute: string = '/distritos/';
   backRoute: string = '/distritos';
+  rol_user: string = "3";
 
   constructor(private distritosService: DistritosService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 
