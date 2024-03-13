@@ -74,6 +74,7 @@ export class LoginComponent {
     console.log(this.code.value);
     event.preventDefault();
     if (this.code.value === this.authCode) {
+      localStorage.setItem('auth', 'true');
       this.activate = true;
       this.authMessage = 'Código correcto. Redirigiendo...';
       localStorage.setItem('token', this.token);

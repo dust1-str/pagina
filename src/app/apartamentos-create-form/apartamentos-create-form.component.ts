@@ -16,6 +16,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ApartamentosCreateFormComponent {
   edificios: any[] = [];
+  estados = [
+    { id: 0, name: 'Inactivo' },
+    { id: 1, name: 'Activo' }
+  ];
   apartamentoForm = new FormGroup({
     Nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
     Descripcion: new FormControl('', [Validators.required, Validators.minLength(3)]),
