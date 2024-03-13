@@ -1,4 +1,4 @@
-import { Component,Input  } from '@angular/core';
+import { Component,Input,Output, EventEmitter  } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +21,11 @@ export class DashboardComponent {
   }
 
   @Input() authMessage: string = '';
+  @Output() rol = new EventEmitter<void>();
   
+  verificarRol(): void {
+    this.rol.emit();
+  }
   logout(): void {
   }
 }

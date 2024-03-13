@@ -37,9 +37,11 @@
 
       <div class="form-group">
         <label for="Estado" class="form-label">Estado</label>
-        <input type="text" id="Estado" placeholder="Ingrese el estado del apartamento" formControlName="Estado" class="form-input">
+        <select id="Estado" formControlName="Estado" class="form-input">
+          <option *ngFor="let estado of estados" [value]="estado.id">{{estado.name}}</option>
+        </select>
         <div *ngIf="apartamentoForm.controls.Estado.errors?.['required'] && apartamentoForm.controls.Estado.touched" class="error">
-            El estado es requerido
+          El estado es requerido
         </div>
       </div>
   

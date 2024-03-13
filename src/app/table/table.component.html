@@ -4,18 +4,18 @@
     <thead>
       <tr>
         <th *ngFor="let columna of columnas">{{ columna }}</th>
-        <!-- Columna extra para acciones -->
-        <th *ngIf="rol_user == '1' || rol_user == '2'">Acciones</th>
+        <!--Columna extra para acciones-->
+        <th *ngIf="rol == '1' || rol == '2'">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let elemento of elementos">
         <td *ngFor="let columna of columnas">{{ elemento[columna] }}</td>
-        <td *ngIf="rol_user == '1' || rol_user == '2'">
-          <!-- Boton para editar -->
-          <button class="edit" (click)="emitirEditar(elemento.id)"><i class="fa-solid fa-gear"></i></button>
-          <!-- Boton para eliminar -->
-          <button class="delete" *ngIf="rol_user == '1'" (click)="emitirAviso(elemento.id)"><i class="fa-solid fa-trash"></i></button>
+        <td>
+          <!--Boton para editar-->
+          <button class="edit" *ngIf="rol == '1' || rol == '2'" (click)="emitirEditar(elemento.id)"><i class="fa-solid fa-gear"></i></button>
+          <!--Boton para eliminar-->
+          <button class="delete" *ngIf="rol == '1'" (click)="emitirAviso(elemento.id)"><i class="fa-solid fa-trash"></i></button>
         </td>
       </tr>
       <!-- Fila para añadir elemento -->

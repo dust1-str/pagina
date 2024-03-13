@@ -20,18 +20,29 @@ export class AppComponent {
 
   constructor(private router: Router) { }
 
+  
+
   ngOnInit() {
     const rol = localStorage.getItem('role_id');
-    if (rol === '3') {
-      this.authMessage = 'Usuario no autenticado';
-      this.authStatus = false;
+    const token = localStorage.getItem('token');
+    if (rol && rol !== 'null') {
+      if ((rol === '3' || rol === '2' || rol === '1') && token && token !== null) {
+            this.authMessage = 'Usuario autenticado';
+            this.authStatus = true;
+        } else {
+            this.authMessage = 'Rol no definido';
+            this.authStatus = false;
+            this.router.navigate(['/login']);
+        }
     } else {
-      this.authMessage = 'Usuario autenticado';
-      this.authStatus = true;
+        this.authMessage = 'Rol no definido';
+        this.authStatus = false;
+        this.router.navigate(['/login']);
     }
+    localStorage.setItem('auth', this.authStatus.toString());
     console.log(this.authStatus);
     console.log(this.authMessage);
-  }
+}
 
   navigateTo(table: string): void {
     this.router.navigate([table.toLowerCase()]);

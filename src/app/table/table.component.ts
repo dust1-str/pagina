@@ -16,7 +16,6 @@ import { ConfirmacionEliminacionComponent } from '../confirmacion-eliminacion/co
 export class TableComponent implements OnInit{
 
   ngOnInit(): void {
-    console.log('rol_user', this.rol_user);
   }
 
   @Input() rol_user: String = "";
@@ -34,6 +33,7 @@ export class TableComponent implements OnInit{
   constructor(private router: Router, private crud: CrudService) { }
   mostrarConfirmacion: boolean = false;
   idElemento: number = 0;
+  rol = localStorage.getItem('role_id');
 
   emitirAviso(id: number) {
     this.mostrarConfirmacion = true;
