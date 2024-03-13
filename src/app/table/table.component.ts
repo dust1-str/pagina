@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, Input, Output, EventEmitter,OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { Router } from '@angular/router';
@@ -13,9 +13,13 @@ import { ConfirmacionEliminacionComponent } from '../confirmacion-eliminacion/co
   styleUrl: './table.component.css'
 })
 
-export class TableComponent {
+export class TableComponent implements OnInit{
 
+  ngOnInit(): void {
+    console.log('rol_user', this.rol_user);
+  }
 
+  @Input() rol_user: String = "";
   @Input() elementos: Objeto[] = [];
   @Input() columnas: string[] = [];
   @Input() updateRoute: string = '';

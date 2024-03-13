@@ -21,11 +21,13 @@ export class HomeComponent implements OnInit{
   createRoute: string = '/usuarios/create'; 
   deleteRoute: string = '/usuarios/';
   backRoute: string = '/usuarios';
+  rol_user: string = "3";
 
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 
