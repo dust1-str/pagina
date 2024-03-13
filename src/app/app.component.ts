@@ -3,6 +3,7 @@ import { DashboardComponent } from '././dashboard/dashboard.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { CrudService } from './Core/Services/crud.service';
 
 
 
@@ -18,9 +19,12 @@ export class AppComponent {
   authMessage: string = '';
   authStatus: boolean = false;
 
-  constructor(private router: Router) { }
-
-  
+  constructor(private router: Router, private crud: CrudService) {
+    this.crud.loginSuccessful.subscribe(() => {
+      console.log('login successful');
+      this.ngOnInit();
+    });
+   }
 
   ngOnInit() {
     const rol = localStorage.getItem('role_id');

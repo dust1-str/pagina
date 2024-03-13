@@ -1,6 +1,6 @@
 <div class="container">
     <div *ngIf="authStatus == true" class="dashboard-container2">
-        <app-dashboard (rol)="ngOnInit()" ></app-dashboard>
+        <app-dashboard (logoutEvent)="ngOnInit()" (rol)="ngOnInit()" ></app-dashboard>
     </div>
 
     <div class="menu-container" >

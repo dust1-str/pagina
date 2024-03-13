@@ -5,6 +5,7 @@ import { LoginService } from '../Core/Services/login-service.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { CrudService } from '../Core/Services/crud.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private crud: CrudService) { }
 
   login() {
     this.loginMessage = '';
@@ -81,6 +82,7 @@ export class LoginComponent {
       localStorage.setItem('role_id', this.role_id.toString());
       setTimeout(() => {
         this.router.navigate(['/home']);
+        this.crud.emitLoginSuccessful();
       }, 1500);
     } else {
       this.activate = false;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,13 @@ import { EventEmitter } from '@angular/core';
 export class CrudService {
 
   constructor(private http: HttpClient) { }
+
+  private _loginSuccessful = new Subject<void>();
+  loginSuccessful = this._loginSuccessful.asObservable();
+
+  emitLoginSuccessful() {
+    this._loginSuccessful.next();
+  }
 
   update(endpoint: string, id: number, Nombre: string ): Observable<any> {
     const fullUrl = 'http://127.0.0.1:8000/api/auth' + endpoint + id;

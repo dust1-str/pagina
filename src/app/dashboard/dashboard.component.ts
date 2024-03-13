@@ -16,10 +16,14 @@ export class DashboardComponent {
 
   @Input() authMessage: string = '';
   @Output() rol = new EventEmitter<void>();
+  @Output() logoutEvent = new EventEmitter<void>();
   
   verificarRol(): void {
     this.rol.emit();
   }
   logout(): void {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    this.logoutEvent.emit();
   }
 }
