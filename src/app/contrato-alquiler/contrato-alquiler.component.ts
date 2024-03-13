@@ -14,7 +14,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ContratoAlquilerComponent implements OnInit{
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Fecha_Inicio', 'Fecha_Final', 'Inquilino', 'Apartamento','Monto']; 
+  columnas: string[] = ['id', 'Fecha_Inicio', 'Fecha_Final', 'Inquilino', 'Apartamento','Monto'];
+  updateRoute: string = '/contratoAlquilers/update/';
+  createRoute: string = '/contratoAlquilers/create';
+  deleteRoute: string = '/contratoAlquilers/';
+  backRoute: string = '/contratoAlquilers'; 
 
   constructor(private contratoAlquilerService: ContratoAlquilerService) { }
 

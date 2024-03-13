@@ -1,0 +1,53 @@
+<div class="login-container">
+    
+    <form [formGroup]="contratoForm" (ngSubmit)="create()" class="form-container">
+      <h2 class="form-title">Crear contrato</h2>
+  
+      <div class="form-group">
+        <label for="Fecha_Inicio" class="form-label">Fecha de inicio</label>
+        <input type="date" id="Fecha_Inicio" formControlName="Fecha_Inicio" class="form-input">
+        <div *ngIf="contratoForm.controls.Fecha_Inicio.errors?.['required'] && contratoForm.controls.Fecha_Inicio.touched" class="error">
+            La fecha de inicio es requerida
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Fecha_Fin" class="form-label">Fecha de fin</label>
+        <input type="date" id="Fecha_Fin" formControlName="Fecha_Fin" class="form-input">
+        <div *ngIf="contratoForm.controls.Fecha_Fin.errors?.['required'] && contratoForm.controls.Fecha_Fin.touched" class="error">
+            La fecha de fin es requerida
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="InquilinoID" class="form-label">Inquilino</label>
+        <select id="InquilinoID" formControlName="InquilinoID" class="form-input">
+            <option *ngFor="let inquilino of inquilinos" [value]="inquilino.id">{{inquilino.Nombre}}</option>
+        </select>
+        <div *ngIf="contratoForm.controls.InquilinoID.errors?.['required'] && contratoForm.controls.InquilinoID.touched" class="error">
+            El inquilino es requerido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="ApartamentoID" class="form-label">Apartamento</label>
+        <select id="ApartamentoID" formControlName="ApartamentoID" class="form-input">
+            <option *ngFor="let apartamento of apartamentos" [value]="apartamento.id">{{apartamento.Nombre}}</option>
+        </select>
+        <div *ngIf="contratoForm.controls.ApartamentoID.errors?.['required'] && contratoForm.controls.ApartamentoID.touched" class="error">
+            El apartamento es requerido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Monto" class="form-label">Monto</label>
+        <input type="number" id="Monto" placeholder="Ingrese el monto del contrato" formControlName="Monto" class="form-input">
+        <div *ngIf="contratoForm.controls.Monto.errors?.['required'] && contratoForm.controls.Monto.touched" class="error">
+            El monto es requerido
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="!contratoForm.valid" class="btn btn-primary form-button">Crear contrato</button>
+    </form>
+    
+</div>
