@@ -36,6 +36,8 @@ export const routes: Routes = [
     { path: 'inquilinos', loadComponent:()=>import('./inquilinos/inquilinos.component').then(m=>m.InquilinosComponent), canActivate: [authGuard]},
     { path: 'inquilinos/create', loadComponent:()=>import('./inquilino-create-form/inquilino-create-form.component').then(m=>m.InquilinoCreateFormComponent), canActivate: [authGuard]},
     { path: 'inquilinos/update/:id', loadComponent:()=>import('./inquilino-update-form/inquilino-update-form.component').then(m=>m.InquilinoUpdateFormComponent), canActivate: [authGuard]},
+    { path: 'roles', loadComponent:()=>import('./roles/roles.component').then(m=>m.RolesComponent), canActivate: [authGuard]},
+
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 
 ];

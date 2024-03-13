@@ -1,0 +1,14 @@
+<div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let columna of columnas">{{ columna }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let elemento of elementos">
+          <td *ngFor="let columna of columnas">{{ elemento[columna] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
