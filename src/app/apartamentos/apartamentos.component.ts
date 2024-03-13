@@ -14,6 +14,10 @@ import { CommonModule } from '@angular/common';
 export class ApartamentosComponent implements OnInit {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Descripcion', 'Edificio', 'Estado']; 
+  updateRoute: string = '/apartamentos/update/';
+  createRoute: string = '/apartamentos/create';
+  deleteRoute: string = '/apartamentos/';
+  backRoute: string = '/apartamentos';
 
   constructor(private apartamentosService: ApartamentosService) { }
 

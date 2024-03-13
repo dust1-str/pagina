@@ -1,1 +1,49 @@
-<p>apartamentos-update-form works!</p>
+<div class="login-container">
+    
+    <form [formGroup]="apartamentoForm" (ngSubmit)="update()" class="form-container">
+      <h2 class="form-title">Actualizar apartamento</h2>
+  
+      <div class="form-group">
+        <label for="Nombre" class="form-label">Nombre del apartamento</label>
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre del apartamento" formControlName="Nombre" class="form-input">
+        <div *ngIf="apartamentoForm.controls.Nombre.errors?.['required'] && apartamentoForm.controls.Nombre.touched" class="error">
+            El nombre es requerido
+        </div>
+        <div *ngIf="apartamentoForm.controls.Nombre.errors?.['minlength']" class="error">
+            El nombre debe tener al menos 3 caracteres
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Descripcion" class="form-label">Descripcion</label>
+        <input type="text" id="Descripcion" placeholder="Ingrese la descripcion del apartamento" formControlName="Descripcion" class="form-input">
+        <div *ngIf="apartamentoForm.controls.Descripcion.errors?.['required'] && apartamentoForm.controls.Descripcion.touched" class="error">
+            La descripcion es requerida
+        </div>
+        <div *ngIf="apartamentoForm.controls.Descripcion.errors?.['minlength']" class="error">
+            La descripcion debe tener al menos 3 caracteres
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="EdificioID" class="form-label">Edificio</label>
+        <select id="EdificioID" formControlName="EdificioID" class="form-input">
+            <option *ngFor="let edificio of edificios" [value]="edificio.id">{{edificio.Nombre}}</option>
+        </select>
+        <div *ngIf="apartamentoForm.controls.EdificioID.errors?.['required'] && apartamentoForm.controls.EdificioID.touched" class="error">
+            El edificio es requerido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Estado" class="form-label">Estado</label>
+        <input type="text" id="Estado" placeholder="Ingrese el estado del apartamento" formControlName="Estado" class="form-input">
+        <div *ngIf="apartamentoForm.controls.Estado.errors?.['required'] && apartamentoForm.controls.Estado.touched" class="error">
+            El estado es requerido
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="!apartamentoForm.valid" class="btn btn-primary form-button">Actualizar apartamento</button>
+    </form>
+    
+</div>

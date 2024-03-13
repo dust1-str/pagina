@@ -28,6 +28,8 @@ export const routes: Routes = [
     { path: 'edificios/create', loadComponent:()=>import('./edificio-create-form/edificio-create-form.component').then(m=>m.EdificioCreateFormComponent), canActivate: [authGuard]},
     { path: 'edificios/update/:id', loadComponent:()=>import('./edificio-update-form/edificio-update-form.component').then(m=>m.EdificioUpdateFormComponent), canActivate: [authGuard]},
     { path: 'apartamentos', loadComponent:()=>import('./apartamentos/apartamentos.component').then(m=>m.ApartamentosComponent), canActivate: [authGuard]},
+    { path: 'apartamentos/create', loadComponent:()=>import('./apartamentos-create-form/apartamentos-create-form.component').then(m=>m.ApartamentosCreateFormComponent), canActivate: [authGuard]},
+    { path: 'apartamentos/update/:id', loadComponent:()=>import('./apartamentos-update-form/apartamentos-update-form.component').then(m=>m.ApartamentosUpdateFormComponent), canActivate: [authGuard]},
     { path: 'contrato-alquiler', loadComponent:()=>import('./contrato-alquiler/contrato-alquiler.component').then(m=>m.ContratoAlquilerComponent), canActivate: [authGuard]},
     { path: 'inquilinos', loadComponent:()=>import('./inquilinos/inquilinos.component').then(m=>m.InquilinosComponent), canActivate: [authGuard]},
     { path: 'inquilinos/create', loadComponent:()=>import('./inquilino-create-form/inquilino-create-form.component').then(m=>m.InquilinoCreateFormComponent), canActivate: [authGuard]},
