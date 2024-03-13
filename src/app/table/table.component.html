@@ -1,8 +1,7 @@
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <div class="container">
   <table>
-    <thead >
+    <thead>
       <tr>
         <th *ngFor="let columna of columnas">{{ columna }}</th>
         <th>Acciones</th>
@@ -11,9 +10,9 @@
     <tbody>
       <tr *ngFor="let elemento of elementos">
         <td *ngFor="let columna of columnas">{{ elemento[columna] }}</td>
-        <td >
+        <td>
           <button class="edit" (click)="emitirEditar(elemento.id)"><i class="fa-solid fa-gear"></i></button>
-          <button class="delete" (click)="emitirEliminar(elemento.id)"><i class="fa-solid fa-trash"></i></button>
+          <button class="delete" (click)="emitirAviso(elemento.id)"><i class="fa-solid fa-trash"></i></button>
         </td>
       </tr>
       <tr>
@@ -24,3 +23,5 @@
     </tbody>
   </table>
 </div>
+
+<app-confirmacion-eliminacion *ngIf="mostrarConfirmacion" (confirmado)="eliminarElemento($event)"></app-confirmacion-eliminacion>
