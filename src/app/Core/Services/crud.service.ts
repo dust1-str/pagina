@@ -68,6 +68,11 @@ export class CrudService {
     return this.http.post<any>(url, { Nombre, CalleID });
   }
 
+  createInquilino(Nombre: string, Apellido: string, Telefono: string, Email: string, Cedula: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/inquilinos';
+    return this.http.post<any>(url, { Nombre, Apellido, Telefono, Email, Cedula });
+  }
+
   updateRegion(Nombre: string, PaisIDstring: string, id: number): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/regiones/' + id;
     const PaisID = parseInt(PaisIDstring, 10);
@@ -103,6 +108,12 @@ export class CrudService {
     const CalleID = parseInt(CalleIDstring, 10);
     return this.http.put<any>(url, { Nombre, CalleID });
   }
+
+  updateInquilino(Nombre: string, Apellido: string, Telefono: string, Email: string, Cedula: string, id: number): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/inquilinos/' + id;
+    return this.http.put<any>(url, { Nombre, Apellido, Cedula, Telefono, Email });
+  }
+
 
   getRegiones(): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/regiones';

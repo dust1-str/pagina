@@ -15,6 +15,10 @@ import { CommonModule } from '@angular/common';
 export class InquilinosComponent implements OnInit{
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Apellido', 'Telefono', 'Email','Cedula']; 
+  updateRoute: string = '/inquilinos/update/';
+  createRoute: string = '/inquilinos/create';
+  deleteRoute: string = '/inquilinos/';
+  backRoute: string = '/inquilinos';
 
   constructor(private inquilinosService: InquilinosService) { }
 
