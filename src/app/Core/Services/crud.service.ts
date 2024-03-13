@@ -51,9 +51,15 @@ export class CrudService {
   }
 
   createBarrio(Nombre: string, DistritoIDstring: string): Observable<any> {
-    const url = 'http://127.0.0.1:8000/api/auth/barrios'
+    const url = 'http://127.0.0.1:8000/api/auth/barrios';
     const DistritoID = parseInt(DistritoIDstring, 10);
     return this.http.post<any>(url, { Nombre, DistritoID });
+  }
+
+  createCalle(Nombre: string, BarrioIDstring: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/calles';
+    const BarrioID = parseInt(BarrioIDstring, 10);
+    return this.http.post<any>(url, { Nombre, BarrioID });
   }
 
   updateRegion(Nombre: string, PaisIDstring: string, id: number): Observable<any> {
@@ -79,6 +85,12 @@ export class CrudService {
     const DistritoID = parseInt(DistritoIDstring, 10);
     return this.http.put<any>(url, { Nombre, DistritoID });
   }
+  
+  updateCalle(Nombre: string, BarrioIDstring: string, id: number): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/calles/' + id;
+    const BarrioID = parseInt(BarrioIDstring, 10);
+    return this.http.put<any>(url, { Nombre, BarrioID });
+  }
 
   getRegiones(): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/regiones';
@@ -92,6 +104,11 @@ export class CrudService {
 
   getDistritos(): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/distritos';
+    return this.http.get<any>(url);
+  }
+
+  getBarrios(): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/barrios';
     return this.http.get<any>(url);
   }
 }

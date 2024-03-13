@@ -13,7 +13,11 @@ import { CommonModule } from '@angular/common';
 })
 export class CallesComponent implements OnInit {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre', 'Barrio']; 
+  columnas: string[] = ['id', 'Nombre', 'Barrio'];
+  updateRoute: string = '/calles/update/';
+  createRoute: string = '/calles/create';
+  deleteRoute: string = '/calles/';
+  backRoute: string = '/calles'; 
 
   constructor(private callesSerive: CallesService) { }
 

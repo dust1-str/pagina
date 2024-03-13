@@ -22,6 +22,8 @@ export const routes: Routes = [
     { path: 'barrios/create', loadComponent:()=>import('./barrio-create-form/barrio-create-form.component').then(m=>m.BarrioCreateFormComponent), canActivate: [authGuard]},
     { path: 'barrios/update/:id', loadComponent:()=>import('./barrio-update-form/barrio-update-form.component').then(m=>m.BarrioUpdateFormComponent), canActivate: [authGuard]},
     { path: 'calles', loadComponent:()=>import('./calles/calles.component').then(m=>m.CallesComponent), canActivate: [authGuard]},
+    { path: 'calles/create', loadComponent:()=>import('./calle-create-form/calle-create-form.component').then(m=>m.CalleCreateFormComponent), canActivate: [authGuard]},
+    { path: 'calles/update/:id', loadComponent:()=>import('./calle-update-form/calle-update-form.component').then(m=>m.CalleUpdateFormComponent), canActivate: [authGuard]},
     { path: 'edificios', loadComponent:()=>import('./edificios/edificios.component').then(m=>m.EdificiosComponent), canActivate: [authGuard]},
     { path: 'apartamentos', loadComponent:()=>import('./apartamentos/apartamentos.component').then(m=>m.ApartamentosComponent), canActivate: [authGuard]},
     { path: 'contrato-alquiler', loadComponent:()=>import('./contrato-alquiler/contrato-alquiler.component').then(m=>m.ContratoAlquilerComponent), canActivate: [authGuard]},
