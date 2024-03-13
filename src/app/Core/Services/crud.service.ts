@@ -150,6 +150,12 @@ export class CrudService {
     return this.http.put<any>(url, { Nombre, EdificioID, Descripcion, Estado });
   }
 
+  updateUsuario(name: string, email: string, password: string, RoleIDstring: string, id: number): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/usuarios/' + id;
+    const role_id = parseInt(RoleIDstring, 10);
+    return this.http.put<any>(url, { name, email, password, role_id });
+  }
+
   getRegiones(): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/regiones';
     return this.http.get<any>(url);
@@ -187,6 +193,11 @@ export class CrudService {
 
   getApartamentos(): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/apartamentos';
+    return this.http.get<any>(url);
+  }
+
+  getRoles(): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/roles';
     return this.http.get<any>(url);
   }
 }
