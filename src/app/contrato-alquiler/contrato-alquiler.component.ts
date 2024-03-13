@@ -19,11 +19,13 @@ export class ContratoAlquilerComponent implements OnInit{
   createRoute: string = '/contratoAlquilers/create';
   deleteRoute: string = '/contratoAlquilers/';
   backRoute: string = '/contratoAlquilers'; 
+  rol_user: string = "3";
 
   constructor(private contratoAlquilerService: ContratoAlquilerService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 

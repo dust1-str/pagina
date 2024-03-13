@@ -18,11 +18,13 @@ export class CallesComponent implements OnInit {
   createRoute: string = '/calles/create';
   deleteRoute: string = '/calles/';
   backRoute: string = '/calles'; 
+  rol_user: string = "3";
 
   constructor(private callesSerive: CallesService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 

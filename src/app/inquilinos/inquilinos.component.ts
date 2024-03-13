@@ -19,11 +19,13 @@ export class InquilinosComponent implements OnInit{
   createRoute: string = '/inquilinos/create';
   deleteRoute: string = '/inquilinos/';
   backRoute: string = '/inquilinos';
+  rol_user: string = "3";
 
   constructor(private inquilinosService: InquilinosService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 

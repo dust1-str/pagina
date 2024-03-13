@@ -18,13 +18,17 @@
           <button class="delete" *ngIf="rol == '1'" (click)="emitirAviso(elemento.id)"><i class="fa-solid fa-trash"></i></button>
         </td>
       </tr>
-      <tr>
-        <td [attr.colspan]="columnas.length + 1">
-          <button class="add" (click)="emitirAgregar()"><i class="fa-solid fa-plus"></i></button>
-        </td>
-      </tr>
+      <!-- Fila para añadir elemento -->
+      <ng-container *ngIf="rol_user == '1' || rol_user == '2'">
+        <tr>
+          <td [attr.colspan]="columnas.length + 1">
+            <button class="add" (click)="emitirAgregar()"><i class="fa-solid fa-plus"></i></button>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 </div>
+
 
 <app-confirmacion-eliminacion *ngIf="mostrarConfirmacion" (confirmado)="eliminarElemento($event)"></app-confirmacion-eliminacion>

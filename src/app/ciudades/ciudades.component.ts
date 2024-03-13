@@ -20,11 +20,13 @@ export class CiudadesComponent implements OnInit {
   createRoute: string = '/ciudades/create';
   deleteRoute: string = '/ciudades/';
   backRoute: string = '/ciudades';
+  rol_user: string = "3";
 
   constructor(private ciudadesService: CiudadesService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 

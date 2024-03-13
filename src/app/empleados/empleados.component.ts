@@ -19,11 +19,13 @@ export class EmpleadosComponent implements OnInit {
   createRoute: string = '/paises/create'; 
   deleteRoute: string = '/paises/';
   backRoute: string = '/paises';
+  rol_user: string = "3";
 
   constructor(private empleadoService: EmpleadoService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 

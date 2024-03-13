@@ -18,11 +18,13 @@ export class EdificiosComponent implements OnInit {
   createRoute: string = '/edificios/create';
   deleteRoute: string = '/edificios/';
   backRoute: string = '/edificios';
+  rol_user: string = "3";
 
   constructor(private edificiosService: EdificiosService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 

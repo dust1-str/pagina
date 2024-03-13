@@ -19,11 +19,13 @@ export class BarriosComponent implements OnInit {
   createRoute: string = '/barrios/create';
   deleteRoute: string = '/barrios/';
   backRoute: string = '/barrios';
+  rol_user: string = "3";
 
   constructor(private barriosService: BarriosService) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
+    this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
   }
 
