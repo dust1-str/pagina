@@ -12,8 +12,9 @@
     <a routerLink="/contrato-alquiler" ><i class="fa-solid fa-file-signature symbol"></i>Contratos</a>
     <a routerLink="/inquilinos" ><i class="fa-solid fa-building-user symbol"></i>Inquilinos</a>
 
-    <div class="divider"></div>
-    <a routerLink="/home" class="home-link"><i class="fa-solid fa-users"></i>Usuarios</a>
+    <div class="divider" *ngIf="rol_user == '1'"></div>
+    <a routerLink="/home" class="home-link" *ngIf="rol_user == '1'"><i class="fa-solid fa-users"></i>Usuarios</a>
+    <a routerLink="/home" class="home-link rol" *ngIf="rol_user == '1'"><i class="fa-solid fa-address-book"></i>Roles</a>
 
 
 
