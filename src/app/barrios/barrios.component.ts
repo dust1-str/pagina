@@ -27,6 +27,10 @@ export class BarriosComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.barriosService.obtenerElemento().subscribe(
       data => {

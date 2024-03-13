@@ -27,6 +27,10 @@ export class DistritosComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.distritosService.obtenerElemento().subscribe(
       data => {

@@ -23,7 +23,10 @@ export class RegionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerDatos();
+  }
 
+  actualizarElementos() {
+    this.ngOnInit();
   }
 
   obtenerDatos() {

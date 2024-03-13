@@ -26,6 +26,10 @@ export class CallesComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.callesSerive.obtenerElemento().subscribe(
       data => {

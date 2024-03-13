@@ -27,6 +27,10 @@ export class EmpleadosComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.empleadoService.obtenerEmpleados().subscribe(
       data => {

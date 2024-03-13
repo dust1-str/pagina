@@ -26,6 +26,10 @@ export class EdificiosComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.edificiosService.obtenerElemento().subscribe(
       data => {

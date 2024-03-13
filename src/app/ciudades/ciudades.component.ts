@@ -28,6 +28,10 @@ export class CiudadesComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.ciudadesService.obtenerElemento().subscribe(
       data => {

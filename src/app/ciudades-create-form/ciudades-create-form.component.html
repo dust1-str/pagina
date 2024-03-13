@@ -5,7 +5,7 @@
   
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre de la ciudad</label>
-        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la ciudad" formControlName="Nombre" class="form-input">
         <div *ngIf="ciudadForm.controls.Nombre.errors?.['required'] && ciudadForm.controls.Nombre.touched" class="error">
             La ciudad es requerida
         </div>

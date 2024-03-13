@@ -23,6 +23,10 @@ export class ContratoAlquilerComponent implements OnInit{
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.contratoAlquilerService.obtenerElemento().subscribe(
       data => {

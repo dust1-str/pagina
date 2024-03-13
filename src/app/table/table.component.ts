@@ -25,6 +25,7 @@ export class TableComponent {
   @Output() editar = new EventEmitter<number>();
   @Output() eliminar = new EventEmitter<number>();
   @Output() agregar = new EventEmitter();
+  @Output() elementoEliminado = new EventEmitter<void>();
 
   constructor(private router: Router, private crud: CrudService) { }
   mostrarConfirmacion: boolean = false;
@@ -58,9 +59,10 @@ export class TableComponent {
     this.eliminar.emit(id);
     this.crud.eliminar(this.deleteRoute, id).subscribe(
       data => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate([this.router.url]);
+        // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        // this.router.onSameUrlNavigation = 'reload';
+        // this.router.navigate([this.router.url]);
+        this.elementoEliminado.emit(); 
       },
       error => {
         console.error('Error al eliminar elemento', error);

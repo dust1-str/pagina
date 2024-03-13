@@ -16,7 +16,7 @@
   
       <div class="form-group">
         <label for="Apellido" class="form-label">Apellido</label>
-        <input type="text" id="Apellido" placeholder="Ingrese el apellido del inquilino" formControlName="Apellido" class="form-input">
+        <input type="text" id="Apellido" placeholder="Ingrese el apellido" formControlName="Apellido" class="form-input">
         <div *ngIf="inquilinoForm.controls.Apellido.errors?.['required'] && inquilinoForm.controls.Apellido.touched" class="error">
             El apellido es requerido
         </div>
@@ -27,7 +27,7 @@
 
       <div class="form-group">
         <label for="Telefono" class="form-label">Telefono</label>
-        <input type="text" id="Telefono" placeholder="Ingrese el telefono del inquilino" formControlName="Telefono" class="form-input">
+        <input type="text" id="Telefono" placeholder="Ingrese el telefono" formControlName="Telefono" class="form-input">
         <div *ngIf="inquilinoForm.controls.Telefono.errors?.['required'] && inquilinoForm.controls.Telefono.touched" class="error">
             El telefono es requerido
         </div>
@@ -38,7 +38,7 @@
 
       <div class="form-group">
         <label for="Email" class="form-label">Email</label>
-        <input type="text" id="Email" placeholder="Ingrese el email del inquilino" formControlName="Email" class="form-input">
+        <input type="text" id="Email" placeholder="Ingrese el email" formControlName="Email" class="form-input">
         <div *ngIf="inquilinoForm.controls.Email.errors?.['required'] && inquilinoForm.controls.Email.touched" class="error">
             El email es requerido
         </div>

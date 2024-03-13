@@ -1,11 +1,11 @@
 <div class="login-container">
     
     <form [formGroup]="ciudadForm" (ngSubmit)="update()" class="form-container">
-      <h2 class="form-title">Crear ciudad</h2>
+      <h2 class="form-title">Actualizar ciudad</h2>
   
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre de la ciudad</label>
-        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la ciudad" formControlName="Nombre" class="form-input">
         <div *ngIf="ciudadForm.controls.Nombre.errors?.['required'] && ciudadForm.controls.Nombre.touched" class="error">
             La ciudad es requerida
         </div>

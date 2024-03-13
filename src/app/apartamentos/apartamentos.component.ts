@@ -22,6 +22,10 @@ export class ApartamentosComponent implements OnInit {
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.apartamentosService.obtenerElemento().subscribe(
       data => {

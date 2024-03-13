@@ -27,6 +27,10 @@ export class InquilinosComponent implements OnInit{
 
   }
 
+  actualizarElementos() {
+    this.ngOnInit();
+  }
+
   obtenerDatos() {
     this.inquilinosService.obtenerElemento().subscribe(
       data => {
