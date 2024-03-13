@@ -1,0 +1,32 @@
+<div class="login-container">
+    
+    <form [formGroup]="edificioForm" (ngSubmit)="create()" class="form-container">
+      <h2 class="form-title">Crear edificio</h2>
+  
+      <div class="form-group">
+        <label for="Nombre" class="form-label">Nombre del edificio</label>
+        <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
+        <div *ngIf="edificioForm.controls.Nombre.errors?.['required'] && edificioForm.controls.Nombre.touched" class="error">
+            El edificio es requerido
+        </div>
+        <div *ngIf="edificioForm.controls.Nombre.errors?.['minlength']" class="error">
+            El edificio debe tener al menos 3 caracteres
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="CalleID" class="form-label">Barrio</label>
+        <select id="CalleID" formControlName="CalleID" class="form-input">
+            <option *ngFor="let calle of calles" [value]="calle.id">{{calle.Nombre}}</option>
+        </select>
+        <div *ngIf="edificioForm.controls.CalleID.errors?.['required'] && edificioForm.controls.CalleID.touched" class="error">
+            La calle es requerida
+        </div>
+    </div>
+  
+      <button type="submit" [disabled]="!edificioForm.valid" class="btn btn-primary form-button">Crear edificio</button>
+    </form>
+    
+</div>
+
+
