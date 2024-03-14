@@ -39,6 +39,6 @@ export const routes: Routes = [
     { path: 'roles', loadComponent:()=>import('./roles/roles.component').then(m=>m.RolesComponent), canActivate: [authGuard]},
     {path: 'usuarios/update/:id', loadComponent:()=>import('./usuario-update-form/usuario-update-form.component').then(m=>m.UsuarioUpdateFormComponent), canActivate: [authGuard]},
 
-    { path: '', redirectTo: '/home', pathMatch: 'full' }
+    { path: '', redirectTo: '/paises', pathMatch: 'full' }
 
 ];
