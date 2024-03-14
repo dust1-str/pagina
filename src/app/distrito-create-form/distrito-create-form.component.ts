@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-distrito-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './distrito-create-form.component.html',
-  styleUrl: './distrito-create-form.component.css'
+  styleUrl: '../create-form/create-form.component.css'
 })
 export class DistritoCreateFormComponent {
   ciudades: any[] = [];

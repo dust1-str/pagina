@@ -6,10 +6,10 @@
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre del edificio</label>
         <input type="text" id="Nombre" placeholder="Ingrese el nombre del edificio" formControlName="Nombre" class="form-input">
-        <div *ngIf="edificioForm.controls.Nombre.errors?.['required'] && edificioForm.controls.Nombre.touched" class="error">
+        <div *ngIf="edificioForm.controls.Nombre.errors?.['required'] && edificioForm.controls.Nombre.touched" class="text-danger">
             El edificio es requerido
         </div>
-        <div *ngIf="edificioForm.controls.Nombre.errors?.['minlength']" class="error">
+        <div *ngIf="edificioForm.controls.Nombre.errors?.['minlength']" class="text-danger">
             El edificio debe tener al menos 3 caracteres
         </div>
       </div>
@@ -19,12 +19,16 @@
         <select id="CalleID" formControlName="CalleID" class="form-input">
             <option *ngFor="let calle of calles" [value]="calle.id">{{calle.Nombre}}</option>
         </select>
-        <div *ngIf="edificioForm.controls.CalleID.errors?.['required'] && edificioForm.controls.CalleID.touched" class="error">
+        <div *ngIf="edificioForm.controls.CalleID.errors?.['required'] && edificioForm.controls.CalleID.touched" class="text-danger">
             La calle es requerida
         </div>
     </div>
   
       <button type="submit" [disabled]="!edificioForm.valid" class="btn btn-primary form-button">Crear edificio</button>
+      <div class="center">
+        <a routerLink="/edificios" class="back-button">Return</a>
+      </div>
+  
     </form>
     
 </div>

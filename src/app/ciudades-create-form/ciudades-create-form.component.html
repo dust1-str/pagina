@@ -6,10 +6,10 @@
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre de la ciudad</label>
         <input type="text" id="Nombre" placeholder="Ingrese el nombre de la ciudad" formControlName="Nombre" class="form-input">
-        <div *ngIf="ciudadForm.controls.Nombre.errors?.['required'] && ciudadForm.controls.Nombre.touched" class="error">
+        <div *ngIf="ciudadForm.controls.Nombre.errors?.['required'] && ciudadForm.controls.Nombre.touched" class="text-danger">
             La ciudad es requerida
         </div>
-        <div *ngIf="ciudadForm.controls.Nombre.errors?.['minlength']" class="error">
+        <div *ngIf="ciudadForm.controls.Nombre.errors?.['minlength']" class="text-danger">
             La ciudad debe tener al menos 3 caracteres
         </div>
       </div>
@@ -19,12 +19,15 @@
         <select id="RegionID" formControlName="RegionID" class="form-input">
             <option *ngFor="let region of regiones" [value]="region.id">{{region.Nombre}}</option>
         </select>
-        <div *ngIf="ciudadForm.controls.RegionID.errors?.['required'] && ciudadForm.controls.RegionID.touched" class="error">
+        <div *ngIf="ciudadForm.controls.RegionID.errors?.['required'] && ciudadForm.controls.RegionID.touched" class="text-danger">
             La región es requerida
         </div>
     </div>
   
       <button type="submit" [disabled]="!ciudadForm.valid" class="btn btn-primary form-button">Crear ciudad</button>
+      <div class="center">
+        <a routerLink="/ciudades" class="back-button">Return</a>
+      </div>
     </form>
     
 </div>

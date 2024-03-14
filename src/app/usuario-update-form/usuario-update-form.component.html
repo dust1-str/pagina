@@ -6,13 +6,13 @@
             <div class="form-group">
                 <label for="name" class="form-label">Nombre</label>
                 <input id="name" placeholder="Ingrese su nombre" formControlName="name" class="form-input">
-                <div *ngIf="usuarioForm.controls.name.errors?.['required'] && usuarioForm.controls.name.touched" class="error">
+                <div *ngIf="usuarioForm.controls.name.errors?.['required'] && usuarioForm.controls.name.touched" class="text-danger">
                         El nombre es requerido
                     </div>
-                    <div *ngIf="usuarioForm.controls.name.errors?.['minlength']" class="error">
+                    <div *ngIf="usuarioForm.controls.name.errors?.['minlength']" class="text-danger">
                         El nombre debe tener al menos 3 caracteres
                     </div>
-                    <div *ngIf="usuarioForm.controls.name.errors?.['maxlength']" class="error">
+                    <div *ngIf="usuarioForm.controls.name.errors?.['maxlength']" class="text-danger">
                         El nombre debe tener menos de 15 caracteres
                     </div>
             </div>
@@ -20,10 +20,10 @@
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" placeholder="Ingrese su email" formControlName="email" class="form-input">
-                <div *ngIf="usuarioForm.controls.email.errors?.['required'] && usuarioForm.controls.email.touched" class="error">
+                <div *ngIf="usuarioForm.controls.email.errors?.['required'] && usuarioForm.controls.email.touched" class="text-danger">
                         El email es requerido
                     </div>
-                    <div *ngIf="usuarioForm.controls.email.errors?.['email']" class="error">
+                    <div *ngIf="usuarioForm.controls.email.errors?.['email']" class="text-danger">
                         Por favor, ingrese un email válido
                     </div>
             </div>
@@ -33,12 +33,16 @@
                 <select id="role_id" formControlName="role_id" class="form-input">
                     <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                 </select>
-                <div *ngIf="usuarioForm.controls.role_id.errors?.['required'] && usuarioForm.controls.role_id.touched" class="error">
+                <div *ngIf="usuarioForm.controls.role_id.errors?.['required'] && usuarioForm.controls.role_id.touched" class="text-danger">
                     El rol es requerido
                 </div>
             </div>
 
             <button type="submit" class="form-button">Actualizar</button>
+            <div class="center">
+                <a routerLink="/home" class="back-button">Return</a>
+              </div>
+          
         </form>
         
     </div>

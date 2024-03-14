@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-calle-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './calle-update-form.component.html',
-  styleUrl: './calle-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class CalleUpdateFormComponent {
   barrios: any[] = [];

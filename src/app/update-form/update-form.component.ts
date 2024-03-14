@@ -3,12 +3,12 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CrudService } from '../Core/Services/crud.service';
-import { Router } from '@angular/router';
+import { Router,RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './update-form.component.html',
   styleUrl: './update-form.component.css'
 })

@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-inquilino-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './inquilino-update-form.component.html',
-  styleUrl: './inquilino-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class InquilinoUpdateFormComponent {
   inquilinoForm = new FormGroup({

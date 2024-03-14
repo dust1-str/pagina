@@ -6,10 +6,10 @@
             <div class="form-group">
                 <label for="Nombre" class="form-label">Nombre de la region</label>
                 <input type="text" id="Nombre" placeholder="Ingrese el nombre de la region" formControlName="Nombre" class="form-input">
-                <div *ngIf="regionForm.controls.Nombre.errors?.['required'] && regionForm.controls.Nombre.touched" class="error">
+                <div *ngIf="regionForm.controls.Nombre.errors?.['required'] && regionForm.controls.Nombre.touched" class="text-danger">
                         La región es requerida
                 </div>
-                <div *ngIf="regionForm.controls.Nombre.errors?.['minlength']" class="error">
+                <div *ngIf="regionForm.controls.Nombre.errors?.['minlength']" class="text-danger">
                         La region debe tener al menos 3 caracteres
                 </div>
             </div>
@@ -19,12 +19,15 @@
                 <select id="PaisID" formControlName="PaisID" class="form-input">
                         <option *ngFor="let pais of paises" [value]="pais.id">{{pais.Nombre}}</option>
                 </select>
-                <div *ngIf="regionForm.controls.PaisID.errors?.['required'] && regionForm.controls.PaisID.touched" class="error">
+                <div *ngIf="regionForm.controls.PaisID.errors?.['required'] && regionForm.controls.PaisID.touched" class="text-danger">
                         El pais es requerido
                 </div>
         </div>
     
             <button type="submit" [disabled]="!regionForm.valid" class="btn btn-primary form-button">Actualizar region</button>
+            <div class="center">
+                <a routerLink="/regiones" class="back-button">Return</a>
+              </div>
         </form>
         
 </div>

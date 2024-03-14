@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-contrato-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './contrato-update-form.component.html',
-  styleUrl: './contrato-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class ContratoUpdateFormComponent {
   inquilinos: any[] = [];

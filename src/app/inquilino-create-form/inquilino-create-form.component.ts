@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-inquilino-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './inquilino-create-form.component.html',
-  styleUrl: './inquilino-create-form.component.css'
+  styleUrl: '../create-form/create-form.component.css'
 })
 export class InquilinoCreateFormComponent {
   inquilinoForm = new FormGroup({

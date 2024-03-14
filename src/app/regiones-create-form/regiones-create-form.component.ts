@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-regiones-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './regiones-create-form.component.html',
-  styleUrl: './regiones-create-form.component.css'
+  styleUrl: '../create-form/create-form.component.css'
 })
 export class RegionesCreateFormComponent {
   paises: any[] = [];

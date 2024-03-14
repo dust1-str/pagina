@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-usuario-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './usuario-update-form.component.html',
-  styleUrl: './usuario-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class UsuarioUpdateFormComponent {
   roles: any[] = [];

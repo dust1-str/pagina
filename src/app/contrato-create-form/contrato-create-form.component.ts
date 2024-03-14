@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-contrato-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './contrato-create-form.component.html',
-  styleUrl: './contrato-create-form.component.css'
+  styleUrl: '../create-form/create-form.component.css'
 })
 export class ContratoCreateFormComponent {
   inquilinos: any[] = [];

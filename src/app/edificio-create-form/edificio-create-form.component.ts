@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edificio-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './edificio-create-form.component.html',
-  styleUrl: './edificio-create-form.component.css'
+  styleUrl: '../create-form/create-form.component.css'
 })
 export class EdificioCreateFormComponent {
   calles: any[] = [];
