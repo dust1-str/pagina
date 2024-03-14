@@ -16,11 +16,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UsuarioUpdateFormComponent {
   roles: any[] = [];
+  usuario: any;
   showPassword = new FormControl(false);
   usuarioForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]),
     role_id: new FormControl('', Validators.required),
   });
 
@@ -37,18 +37,34 @@ export class UsuarioUpdateFormComponent {
         console.log(error);
       }
     });
+    const idString = this.route.snapshot.paramMap.get('id');
+  if (idString) {
+    this.crud.getUsuario(idString).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.usuario = data;
+        this.usuarioForm.setValue({
+          name: this.usuario.name,
+          email: this.usuario.email,
+          role_id: this.usuario.role_id
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
   }
 
   update() {
     const name = this.usuarioForm.value.name;
     const email = this.usuarioForm.value.email;
-    const password = this.usuarioForm.value.password;
     const role_id = this.usuarioForm.value.role_id;
     const idString = this.route.snapshot.paramMap.get('id');
     
-    if (name && email && password && role_id && idString) {
+    if (name && email && role_id && idString) {
       const id = parseInt(idString, 10);
-      this.crud.updateUsuario(name, email, password, role_id, id).subscribe({
+      this.crud.updateUsuario(name, email, role_id, id).subscribe({
         next: (data) => {
           console.log(data);
           this.router.navigate(['/home']);

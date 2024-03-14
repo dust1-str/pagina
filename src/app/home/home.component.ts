@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
   updateRoute: string = '/usuarios/update/';
   createRoute: string = '/usuarios/create'; 
   deleteRoute: string = '/usuarios/';
-  backRoute: string = '/usuarios';
+  backRoute: string = '/home';
   rol_user: string = "3";
 
   constructor(private usuarioService: UsuarioService) { }
@@ -28,7 +28,10 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
+  }
 
+  actualizarElementos() {
+    this.ngOnInit();
   }
 
   obtenerDatos() {
