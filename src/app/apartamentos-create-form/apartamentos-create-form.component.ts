@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-apartamentos-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './apartamentos-create-form.component.html',
-  styleUrl: './apartamentos-create-form.component.css'
+  styleUrl: '../create-form/create-form.component.css'
 })
 export class ApartamentosCreateFormComponent {
   edificios: any[] = [];

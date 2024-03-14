@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,RouterLink } from '@angular/router';
 import { CrudService } from '../Core/Services/crud.service';
 
 @Component({
   selector: 'app-create-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.css'
 })

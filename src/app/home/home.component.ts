@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit{
   deleteRoute: string = '/usuarios/';
   backRoute: string = '/home';
   rol_user: string = "3";
+  section_id: boolean = true;
+
 
   constructor(private usuarioService: UsuarioService) { }
 

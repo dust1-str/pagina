@@ -6,10 +6,10 @@
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre del apartamento</label>
         <input type="text" id="Nombre" placeholder="Ingrese el nombre del apartamento" formControlName="Nombre" class="form-input">
-        <div *ngIf="apartamentoForm.controls.Nombre.errors?.['required'] && apartamentoForm.controls.Nombre.touched" class="error">
+        <div *ngIf="apartamentoForm.controls.Nombre.errors?.['required'] && apartamentoForm.controls.Nombre.touched" class="text-danger">
             El nombre es requerido
         </div>
-        <div *ngIf="apartamentoForm.controls.Nombre.errors?.['minlength']" class="error">
+        <div *ngIf="apartamentoForm.controls.Nombre.errors?.['minlength']" class="text-danger">
             El nombre debe tener al menos 3 caracteres
         </div>
       </div>
@@ -17,10 +17,10 @@
       <div class="form-group">
         <label for="Descripcion" class="form-label">Descripcion</label>
         <input type="text" id="Descripcion" placeholder="Ingrese la descripcion del apartamento" formControlName="Descripcion" class="form-input">
-        <div *ngIf="apartamentoForm.controls.Descripcion.errors?.['required'] && apartamentoForm.controls.Descripcion.touched" class="error">
+        <div *ngIf="apartamentoForm.controls.Descripcion.errors?.['required'] && apartamentoForm.controls.Descripcion.touched" class="text-danger">
             La descripcion es requerida
         </div>
-        <div *ngIf="apartamentoForm.controls.Descripcion.errors?.['minlength']" class="error">
+        <div *ngIf="apartamentoForm.controls.Descripcion.errors?.['minlength']" class="text-danger">
             La descripcion debe tener al menos 3 caracteres
         </div>
       </div>
@@ -30,7 +30,7 @@
         <select id="EdificioID" formControlName="EdificioID" class="form-input">
             <option *ngFor="let edificio of edificios" [value]="edificio.id">{{edificio.Nombre}}</option>
         </select>
-        <div *ngIf="apartamentoForm.controls.EdificioID.errors?.['required'] && apartamentoForm.controls.EdificioID.touched" class="error">
+        <div *ngIf="apartamentoForm.controls.EdificioID.errors?.['required'] && apartamentoForm.controls.EdificioID.touched" class="text-danger">
             El edificio es requerido
         </div>
       </div>
@@ -47,6 +47,9 @@
       </div>
   
       <button type="submit" [disabled]="!apartamentoForm.valid" class="btn btn-primary form-button">Actualizar apartamento</button>
+      <div class="center">
+        <a routerLink="/apartamentos" class="back-button">Return</a>
+      </div>
     </form>
     
 </div>

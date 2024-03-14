@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-apartamentos-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './apartamentos-update-form.component.html',
-  styleUrl: './apartamentos-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class ApartamentosUpdateFormComponent {
   edificios: any[] = [];

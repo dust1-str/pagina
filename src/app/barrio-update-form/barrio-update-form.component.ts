@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-barrio-update-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './barrio-update-form.component.html',
-  styleUrl: './barrio-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class BarrioUpdateFormComponent {
   distritos: any[] = [];

@@ -6,10 +6,10 @@
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre del distrito</label>
         <input type="text" id="Nombre" placeholder="Ingrese el nombre del distrito" formControlName="Nombre" class="form-input">
-        <div *ngIf="distritoForm.controls.Nombre.errors?.['required'] && distritoForm.controls.Nombre.touched" class="error">
+        <div *ngIf="distritoForm.controls.Nombre.errors?.['required'] && distritoForm.controls.Nombre.touched" class="text-danger">
             El distrito es requerido
         </div>
-        <div *ngIf="distritoForm.controls.Nombre.errors?.['minlength']" class="error">
+        <div *ngIf="distritoForm.controls.Nombre.errors?.['minlength']" class="text-danger">
             El distrito debe tener al menos 3 caracteres
         </div>
       </div>
@@ -19,12 +19,15 @@
         <select id="CiudadID" formControlName="CiudadID" class="form-input">
             <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ciudad.Nombre}}</option>
         </select>
-        <div *ngIf="distritoForm.controls.CiudadID.errors?.['required'] && distritoForm.controls.CiudadID.touched" class="error">
+        <div *ngIf="distritoForm.controls.CiudadID.errors?.['required'] && distritoForm.controls.CiudadID.touched" class="text-danger">
             La ciudad es requerida
         </div>
     </div>
   
       <button type="submit" [disabled]="!distritoForm.valid" class="btn btn-primary form-button">Actualizar distrito</button>
+      <div class="center">
+        <a routerLink="/distritos" class="back-button">Return</a>
+      </div>
     </form>
     
 </div>

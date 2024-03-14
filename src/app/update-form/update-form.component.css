@@ -2,27 +2,32 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 10%;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: #243341; /* Cambiar el color de fondo */
 }
 
 .form-title {
     margin-bottom: 20px;
     text-align: center;
+    color: #FFFFFF; /* Cambiar el color del texto */
 }
 
 .form-label {
     display: block;
     margin-bottom: 5px;
+    color: #FFFFFF; /* Cambiar el color del texto */
 }
 
 .form-input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #2C3E50; /* Cambiar el color del borde */
     border-radius: 4px;
     margin-bottom: 10px;
+    background-color: #192734; /* Cambiar el color de fondo */
+    color: #FFFFFF; /* Cambiar el color del texto */
 }
 
 .form-button {
@@ -30,7 +35,44 @@
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #ffffff; /* Cambiar el color de fondo */
+    color: #797979; /* Cambiar el color del texto */
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for background-color */
+
 }
+
+.form-button:hover {
+    background-color: #3e723e; /* Cambiar el color de fondo al pasar el cursor encima */
+    color: white;
+}
+
+.text-danger{
+    color: rgb(196, 34, 34);
+}
+
+.center {
+    display: flex;
+    justify-content: start;
+  }
+  
+  .back-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 4px;
+    font-size: 10px;
+    border-radius: 4px;
+    height: 20px;
+    width: 120px;
+    background-color: #f8f9fa;
+    color: #797979; /* Cambiar el color del texto */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Add transition for background-color */
+  }
+  
+  .back-button:hover {
+    background-color: #3e4872;
+    color: white;
+  }

@@ -6,10 +6,10 @@
       <div class="form-group">
         <label for="Nombre" class="form-label">Nombre de la calle</label>
         <input type="text" id="Nombre" placeholder="Ingrese el nombre de la calle" formControlName="Nombre" class="form-input">
-        <div *ngIf="calleForm.controls.Nombre.errors?.['required'] && calleForm.controls.Nombre.touched" class="error">
+        <div *ngIf="calleForm.controls.Nombre.errors?.['required'] && calleForm.controls.Nombre.touched" class="text-danger">
             La calle es requerida
         </div>
-        <div *ngIf="calleForm.controls.Nombre.errors?.['minlength']" class="error">
+        <div *ngIf="calleForm.controls.Nombre.errors?.['minlength']" class="text-danger">
             La calle debe tener al menos 3 caracteres
         </div>
       </div>
@@ -19,12 +19,15 @@
         <select id="BarrioID" formControlName="BarrioID" class="form-input">
             <option *ngFor="let barrio of barrios" [value]="barrio.id">{{barrio.Nombre}}</option>
         </select>
-        <div *ngIf="calleForm.controls.BarrioID.errors?.['required'] && calleForm.controls.BarrioID.touched" class="error">
+        <div *ngIf="calleForm.controls.BarrioID.errors?.['required'] && calleForm.controls.BarrioID.touched" class="text-danger">
             El barrio es requerido
         </div>
     </div>
   
       <button type="submit" [disabled]="!calleForm.valid" class="btn btn-primary form-button">Crear calle</button>
+      <div class="center">
+        <a routerLink="/calles" class="back-button">Return</a>
+      </div>
     </form>
     
 </div>
