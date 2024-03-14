@@ -17,7 +17,7 @@ export class LogsComponent {
 @ViewChild('logsContainer') private logsContainer!: ElementRef;
 
 ngOnInit() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 14; i++) {
     this.logs.push('Usuario -  Ruta que se uso - El metodo por el que se hizo - Los datos que se pasaron(Query) - Fechas');
   }
 }
