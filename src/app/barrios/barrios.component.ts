@@ -20,6 +20,7 @@ export class BarriosComponent implements OnInit {
   deleteRoute: string = '/barrios/';
   backRoute: string = '/barrios';
   rol_user: string = "3";
+  catalogo: boolean = true;
 
   constructor(private barriosService: BarriosService) { }
 

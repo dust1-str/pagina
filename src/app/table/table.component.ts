@@ -18,6 +18,7 @@ export class TableComponent implements OnInit{
   ngOnInit(): void {
   }
 
+  @Input() catalogo: boolean = false;
   @Input() section_id: boolean = false;
   @Input() rol_user: String = "";
   @Input() elementos: Objeto[] = [];

@@ -19,6 +19,7 @@ export class RegionesComponent implements OnInit {
   deleteRoute: string = '/regiones/';
   backRoute: string = '/regiones';  
   rol_user: string = "3";
+  catalogo: boolean = true;
 
   constructor(private regionService: RegionService) { }
 

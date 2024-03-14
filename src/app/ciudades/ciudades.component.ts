@@ -21,6 +21,7 @@ export class CiudadesComponent implements OnInit {
   deleteRoute: string = '/ciudades/';
   backRoute: string = '/ciudades';
   rol_user: string = "3";
+  catalogo: boolean = true;
 
   constructor(private ciudadesService: CiudadesService) { }
 

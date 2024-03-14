@@ -20,6 +20,7 @@ export class DistritosComponent implements OnInit {
   deleteRoute: string = '/distritos/';
   backRoute: string = '/distritos';
   rol_user: string = "3";
+  catalogo: boolean = true;
 
   constructor(private distritosService: DistritosService) { }
 

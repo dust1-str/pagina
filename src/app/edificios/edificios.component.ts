@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './edificios.component.css'
 })
 export class EdificiosComponent implements OnInit {
+
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre','Calle']; 
   updateRoute: string = '/edificios/update/';
@@ -19,6 +20,7 @@ export class EdificiosComponent implements OnInit {
   deleteRoute: string = '/edificios/';
   backRoute: string = '/edificios';
   rol_user: string = "3";
+  catalogo: boolean = false;
 
   constructor(private edificiosService: EdificiosService) { }
 

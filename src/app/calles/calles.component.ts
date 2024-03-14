@@ -19,6 +19,7 @@ export class CallesComponent implements OnInit {
   deleteRoute: string = '/calles/';
   backRoute: string = '/calles'; 
   rol_user: string = "3";
+  catalogo: boolean = true;
 
   constructor(private callesSerive: CallesService) { }
 

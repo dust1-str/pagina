@@ -20,6 +20,7 @@ export class EmpleadosComponent implements OnInit {
   deleteRoute: string = '/paises/';
   backRoute: string = '/paises';
   rol_user: string = "3";
+  catalogo: boolean = true;
 
   constructor(private empleadoService: EmpleadoService) { }
 
