@@ -210,4 +210,54 @@ export class CrudService {
     const url = 'http://127.0.0.1:8000/api/auth/usuarios/' + id;
     return this.http.get<any>(url);
   }
+
+  getPais(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/paises/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getRegion(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/regiones/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getCiudad(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/ciudades/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getDistrito(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/distritos/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getBarrio(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/barrios/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getCalle(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/calles/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getEdificio(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/edificios/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getApartamento(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/apartamentos/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getContrato(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/contratoAlquilers/' + id;
+    return this.http.get<any>(url);
+  }
+
+  getInquilino(id: string): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/inquilinos/' + id;
+    return this.http.get<any>(url);
+  }
 }

@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BarrioUpdateFormComponent {
   distritos: any[] = [];
+  barrio: any;
   barrioForm = new FormGroup({
     Nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
     DistritoID: new FormControl('', Validators.required),
@@ -24,6 +25,21 @@ export class BarrioUpdateFormComponent {
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getBarrio(idString).subscribe({
+        next: (data) => {
+          this.barrio = data;
+          this.barrioForm.setValue({
+            Nombre: this.barrio.Nombre,
+            DistritoID: this.barrio.DistritoID,
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
     this.crud.getDistritos().subscribe({
       next: (data) => {
         console.log(data);

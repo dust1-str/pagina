@@ -19,18 +19,34 @@ export class UpdateFormComponent {
   @Input() backRoute: string = '';
   @Input() endpoint: string = '';
 
+  pais: any;
+
   updateForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private crud: CrudService) { }
 
   ngOnInit() {
-    console.log(this.id);
+    console.log(this.fields);
     this.updateForm = this.fb.group(
       this.fields.reduce(
         (acc, field) => ({ ...acc, [field.name]: new FormControl('', field.validators) }),
         {}
       )
     );
+  
+    this.crud.getPais(this.id).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.pais = data;
+        this.updateForm.setValue({
+          Nombre: this.pais.Nombre,
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+    console.log(this.id);
   }
 
   update() {

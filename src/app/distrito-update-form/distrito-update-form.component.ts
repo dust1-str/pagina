@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DistritoUpdateFormComponent {
   ciudades: any[] = [];
+  distrito: any;
   distritoForm = new FormGroup({
     Nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
     CiudadID: new FormControl('', Validators.required),
@@ -24,6 +25,21 @@ export class DistritoUpdateFormComponent {
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getDistrito(idString).subscribe({
+        next: (data) => {
+          this.distrito = data;
+          this.distritoForm.setValue({
+            Nombre: this.distrito.Nombre,
+            CiudadID: this.distrito.CiudadID,
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
     this.crud.getCiudades().subscribe({
       next: (data) => {
         console.log(data);

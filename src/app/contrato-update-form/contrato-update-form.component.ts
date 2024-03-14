@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ContratoUpdateFormComponent {
   inquilinos: any[] = [];
   apartamentos: any[] = [];
+  contrato: any;
   contratoForm = new FormGroup({
     Fecha_Inicio: new FormControl('', [Validators.required, Validators.minLength(3)]),
     Fecha_Fin: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -28,6 +29,24 @@ export class ContratoUpdateFormComponent {
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getContrato(idString).subscribe({
+        next: (data) => {
+          this.contrato = data;
+          this.contratoForm.setValue({
+            Fecha_Inicio: this.contrato.Fecha_Inicio,
+            Fecha_Fin: this.contrato.Fecha_Final,
+            InquilinoID: this.contrato.InquilinoID,
+            ApartamentoID: this.contrato.ApartamentoID,
+            Monto: this.contrato.Monto,
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
     this.crud.getInquilinos().subscribe({
       next: (data) => {
         console.log(data);

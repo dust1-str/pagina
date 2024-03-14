@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CalleUpdateFormComponent {
   barrios: any[] = [];
+  calle: any;
   calleForm = new FormGroup({
     Nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
     BarrioID: new FormControl('', Validators.required),
@@ -24,6 +25,21 @@ export class CalleUpdateFormComponent {
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getCalle(idString).subscribe({
+        next: (data) => {
+          this.calle = data;
+          this.calleForm.setValue({
+            Nombre: this.calle.Nombre,
+            BarrioID: this.calle.BarrioID,
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
     this.crud.getBarrios().subscribe({
       next: (data) => {
         console.log(data);

@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegionesUpdateFormComponent {
   paises: any[] = [];
+  region: any;
   regionForm = new FormGroup({
     Nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
     PaisID: new FormControl('', Validators.required),
@@ -24,6 +25,21 @@ export class RegionesUpdateFormComponent {
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getRegion(idString).subscribe({
+        next: (data) => {
+          this.region = data;
+          this.regionForm.setValue({
+            Nombre: this.region.Nombre,
+            PaisID: this.region.PaisID,
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
     this.crud.getPaises().subscribe({
       next: (data) => {
         console.log(data);

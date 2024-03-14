@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './inquilino-update-form.component.css'
 })
 export class InquilinoUpdateFormComponent {
+  inquilino: any;
   inquilinoForm = new FormGroup({
     Nombre: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     Apellido: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -24,6 +25,27 @@ export class InquilinoUpdateFormComponent {
   });
 
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getInquilino(idString).subscribe({
+        next: (data) => {
+          this.inquilino = data;
+          this.inquilinoForm.setValue({
+            Nombre: this.inquilino.Nombre,
+            Apellido: this.inquilino.Apellido,
+            Telefono: this.inquilino.Telefono,
+            Email: this.inquilino.Email,
+            Cedula: this.inquilino.Cedula,
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
+  }
 
   update() {
     const Nombre = this.inquilinoForm.value.Nombre;

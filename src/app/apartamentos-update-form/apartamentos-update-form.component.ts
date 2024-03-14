@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ApartamentosUpdateFormComponent {
   edificios: any[] = [];
+  apartamento: any;
   estados = [
     { id: 0, name: 'Inactivo' },
     { id: 1, name: 'Activo' }
@@ -30,6 +31,23 @@ export class ApartamentosUpdateFormComponent {
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const idString = this.route.snapshot.paramMap.get('id');
+    if (idString) {
+      this.crud.getApartamento(idString).subscribe({
+        next: (data) => {
+          this.apartamento = data;
+          this.apartamentoForm.setValue({
+            Nombre: this.apartamento.Nombre,
+            Descripcion: this.apartamento.Descripcion,
+            EdificioID: this.apartamento.EdificioID,
+            Estado: this.apartamento.Estado.toString(), // Convertir el estado a string
+          });
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
     this.crud.getEdificios().subscribe({
       next: (data) => {
         console.log(data);
