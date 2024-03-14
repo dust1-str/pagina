@@ -26,6 +26,19 @@ export class AppComponent {
     });
    }
 
+   logout() {
+    this.crud.logout().subscribe( 
+      data => {
+        localStorage.clear();
+        this.router.navigate(['/login']);
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Error al cerrar sesión', error);
+      }
+    );
+  }
+
   ngOnInit() {
     const rol = localStorage.getItem('role_id');
     const token = localStorage.getItem('token');
