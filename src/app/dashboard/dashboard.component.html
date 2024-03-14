@@ -12,11 +12,11 @@
     <a routerLink="/contrato-alquiler" (click)="verificarRol()"><i class="fa-solid fa-file-signature symbol"></i>Contratos</a>
     <a routerLink="/inquilinos" (click)="verificarRol()"><i class="fa-solid fa-building-user symbol"></i>Inquilinos</a>
 
-    <div class="flex-container" style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: stretch;">
+    <div class="flex-container" *ngIf="rol_user == '1'">
         <div class="divider" *ngIf="rol_user == '1'"></div>
         <a routerLink="/home" class="home-link" *ngIf="rol_user == '1'" (click)="verificarRol()"><i class="fa-solid fa-users"></i>Usuarios</a>
         <a routerLink="/roles" class="home-link rol" *ngIf="rol_user == '1'"><i class="fa-solid fa-address-book"></i>Roles</a>
-        <a routerLink="/home" class="home-link rol" *ngIf="rol_user == '1'"><i class="fa-solid fa-chart-bar"></i>Logs</a>
+        <a routerLink="/logs" class="home-link rol" *ngIf="rol_user == '1'"><i class="fa-solid fa-file-lines"></i>Logs</a>
     </div>
 
 

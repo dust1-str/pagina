@@ -38,6 +38,7 @@ export const routes: Routes = [
     { path: 'inquilinos/update/:id', loadComponent:()=>import('./inquilino-update-form/inquilino-update-form.component').then(m=>m.InquilinoUpdateFormComponent), canActivate: [authGuard]},
     { path: 'roles', loadComponent:()=>import('./roles/roles.component').then(m=>m.RolesComponent), canActivate: [authGuard]},
     {path: 'usuarios/update/:id', loadComponent:()=>import('./usuario-update-form/usuario-update-form.component').then(m=>m.UsuarioUpdateFormComponent), canActivate: [authGuard]},
+    { path: 'logs', loadComponent:()=>import('./logs/logs.component').then(m=>m.LogsComponent), canActivate: [authGuard]},
 
     { path: '', redirectTo: '/paises', pathMatch: 'full' }
 

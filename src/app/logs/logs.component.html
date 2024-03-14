@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="chat-container">
+    <div class="bar"></div>
+    <div class="logs" #logsContainer>
+        <div class="log" *ngFor="let log of logs">
+            <i class="fa-solid fa-angle-right symbol"></i>
+            <p>{{log}}</p>
+        </div>
+    </div>
+</div>
