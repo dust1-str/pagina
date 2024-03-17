@@ -6,18 +6,22 @@
         <div class="log" *ngFor="let elemento of elementos">
             <i class="fa-solid fa-angle-right symbol"></i>
                 <div class="log2">
-                    <p>Usuario: {{elemento['Usuario']}}</p>
-                    <p>Ruta que uso: {{elemento['route']}}</p>
-                    <p>Metodo HTTP: {{elemento['interaction_type']}}</p>
+                    <p>Usuario: <span class="txtUser">{{elemento['Usuario']}}</span></p>
+                    <p>Ruta que uso: <span class="txtRoute">{{elemento['route']}}</span></p>
+                    <p>Metodo HTTP: <span class="txtIT">{{elemento['interaction_type']}}</span></p>
 
                     <p>Que realizo:</p>
                     <div class="Objeto" *ngIf="isObject(elemento['interaction_query']); else notObject">
-                        <p *ngFor="let key of objectKeys(elemento['interaction_query'])">
+                        <p>&#123;</p>
+                        <p class="objElem" *ngFor="let key of objectKeys(elemento['interaction_query'])">
                             {{key}}: {{elemento['interaction_query'][key]}}
                         </p>
+                        <p>&#125;</p>
                     </div>
                     <ng-template #notObject>
-                        <p class="Objeto">{{elemento['interaction_query']}}</p>
+                        <div class="Objeto">
+                            <p>{{elemento['interaction_query']}}</p>
+                        </div>
                     </ng-template>
 
                     <p>Fecha: {{elemento['interaction_date']}}</p>
