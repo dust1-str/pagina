@@ -5,12 +5,24 @@
     <div class="logs" #logsContainer>
         <div class="log" *ngFor="let elemento of elementos">
             <i class="fa-solid fa-angle-right symbol"></i>
-            <p>{{elemento['Usuario']}}</p>
-            <a [routerLink]="elemento['route']">{{elemento['route']}}</a>
-            <p>{{elemento['interaction_type']}}</p>
-            <p>{{elemento['interaction_query']}}</p>
-            <p>{{elemento['interaction_date']}}</p>
-            <p>{{elemento['interaction_time']}}</p>
+                <div class="log2">
+                    <p>Usuario: {{elemento['Usuario']}}</p>
+                    <p>Ruta que uso: {{elemento['route']}}</p>
+                    <p>Metodo HTTP: {{elemento['interaction_type']}}</p>
+
+                    <p>Que realizo:</p>
+                    <div class="Objeto" *ngIf="isObject(elemento['interaction_query']); else notObject">
+                        <p *ngFor="let key of objectKeys(elemento['interaction_query'])">
+                            {{key}}: {{elemento['interaction_query'][key]}}
+                        </p>
+                    </div>
+                    <ng-template #notObject>
+                        <p class="Objeto">{{elemento['interaction_query']}}</p>
+                    </ng-template>
+
+                    <p>Fecha: {{elemento['interaction_date']}}</p>
+                    <p>Hora: {{elemento['interaction_time']}}</p>
+                </div>
         </div>
     </div>
     <div class="bar2"></div>

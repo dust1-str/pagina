@@ -33,7 +33,13 @@ obtenerDatos() {
   );
 }
 
+isObject(value: any): boolean {
+  return typeof value === 'object' && value !== null;
+}
 
+objectKeys(value: any): string[] {
+  return Object.keys(value);
+}
 
 ngAfterViewChecked() {
   this.scrollToBottom();
