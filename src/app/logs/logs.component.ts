@@ -2,25 +2,38 @@ import { Component, Input, Output, EventEmitter,OnInit, AfterViewChecked, ViewCh
 import { CommonModule } from '@angular/common';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { Router } from '@angular/router';
-import { CrudService } from '../Core/Services/crud.service';
-import { ConfirmacionEliminacionComponent } from '../confirmacion-eliminacion/confirmacion-eliminacion.component';
+import { InteractionsService } from '../Core/Services/interactions.service';
 
 @Component({
   selector: 'app-logs',
   standalone: true,
-  imports: [CommonModule,ConfirmacionEliminacionComponent],
+  imports: [CommonModule],
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.css'
 })
 export class LogsComponent {
-@Input() logs: string[] = [];
+elementos: Objeto[] = [];
 @ViewChild('logsContainer') private logsContainer!: ElementRef;
 
-ngOnInit() {
-  for (let i = 0; i < 14; i++) {
-    this.logs.push('Usuario -  Ruta que se uso - El metodo por el que se hizo - Los datos que se pasaron(Query) - Fechas');
-  }
+constructor(private interactionsService: InteractionsService) { }
+
+
+ngOnInit(): void {
+  this.obtenerDatos();
 }
+
+obtenerDatos() {
+  this.interactionsService.obtenerElemento().subscribe(
+    data => {
+      this.elementos = data;
+    },
+    error => {
+      console.error('Error al obtener elementos', error);
+    }
+  );
+}
+
+
 
 ngAfterViewChecked() {
   this.scrollToBottom();

@@ -3,9 +3,14 @@
 <div class="chat-container">
     <div class="bar"></div>
     <div class="logs" #logsContainer>
-        <div class="log" *ngFor="let log of logs">
+        <div class="log" *ngFor="let elemento of elementos">
             <i class="fa-solid fa-angle-right symbol"></i>
-            <p>{{log}}</p>
+            <p>{{elemento['Usuario']}}</p>
+            <p>{{elemento['route']}}</p>
+            <p>{{elemento['interaction_type']}}</p>
+            <p>{{elemento['interaction_query']}}</p>
+            <p>{{elemento['interaction_date']}}</p>
+            <p>{{elemento['interaction_time']}}</p>
         </div>
     </div>
     <div class="bar2"></div>

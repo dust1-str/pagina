@@ -26,7 +26,6 @@ export class InquilinosComponent implements OnInit{
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
-
   }
 
   actualizarElementos() {
