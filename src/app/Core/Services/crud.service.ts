@@ -101,13 +101,13 @@ export class CrudService {
     return this.http.post<any>(url, { Fecha_Inicio, Fecha_Final, Monto, InquilinoID, ApartamentoID });
   }
 
-  updateContrato(FechaInicio: string, FechaFin: string, InquilinoIDstring: string, ApartamentoIDstring: string, Mont: string, id: number): Observable<any> {
-    console.log(FechaInicio, FechaFin, InquilinoIDstring, ApartamentoIDstring, Mont, id);
+  updateContrato(Fecha_Inicio: string, Fecha_Final: string, InquilinoIDstring: string, ApartamentoIDstring: string, Mont: string, id: number): Observable<any> {
+    console.log(Fecha_Inicio, Fecha_Final, InquilinoIDstring, ApartamentoIDstring, Mont, id);
     const url = 'http://127.0.0.1:8000/api/auth/contratoAlquilers/' + id;
     const InquilinoID = parseInt(InquilinoIDstring, 10);
     const ApartamentoID = parseInt(ApartamentoIDstring, 10);
     const Monto = parseFloat(Mont);
-    return this.http.put<any>(url, { FechaInicio, FechaFin, Monto, InquilinoID, ApartamentoID });
+    return this.http.put<any>(url, { Fecha_Inicio, Fecha_Final, Monto, InquilinoID, ApartamentoID });
   }
 
   updateRegion(Nombre: string, PaisIDstring: string, id: number): Observable<any> {

@@ -32,7 +32,7 @@
             El telefono es requerido
         </div>
         <div *ngIf="inquilinoForm.controls.Telefono.errors?.['maxlength']" class="text-danger">
-            El telefono debe tener máximo 13 caracteres
+            El telefono debe tener máximo 10 caracteres
         </div>
       </div>
 
@@ -52,12 +52,15 @@
 
       <div class="form-group">
         <label for="Cedula" class="form-label">Cedula</label>
-        <input type="text" id="Cedula" placeholder="Ingrese la cedula del inquilino" formControlName="Cedula" class="form-input">
+        <input maxlength="13" type="text" id="Cedula" placeholder="Ingrese la cedula del inquilino" formControlName="Cedula" class="form-input">
         <div *ngIf="inquilinoForm.controls.Cedula.errors?.['required'] && inquilinoForm.controls.Cedula.touched" class="text-danger">
             La cedula es requerida
         </div>
-        <div *ngIf="inquilinoForm.controls.Cedula.errors?.['maxlength']" class="text-danger">
-            La cedula debe tener máximo 15 caracteres
+        <div *ngIf="inquilinoForm.controls.Cedula.errors?.['minlength']" class="text-danger">
+            La cedula debe tener 13 caracteres
+        </div>
+        <div *ngIf="inquilinoForm.controls.Cedula.errors?.['pattern']" class="text-danger">
+          La cedula debe contener solo números
         </div>
       </div>
   

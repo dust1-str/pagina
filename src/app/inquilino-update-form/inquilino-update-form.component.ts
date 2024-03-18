@@ -21,7 +21,7 @@ export class InquilinoUpdateFormComponent {
     Apellido: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     Telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
     Email: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.email]),
-    Cedula: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+    Cedula: new FormControl('', [Validators.required, Validators.minLength(13), Validators.pattern("^[0-9]*$")]),
   });
 
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
