@@ -101,10 +101,12 @@ export class CrudService {
     return this.http.post<any>(url, { Fecha_Inicio, Fecha_Final, Monto, InquilinoID, ApartamentoID });
   }
 
-  updateContrato(FechaInicio: string, FechaFin: string, InquilinoIDstring: string, ApartamentoIDstring: string, Monto: string, id: number): Observable<any> {
+  updateContrato(FechaInicio: string, FechaFin: string, InquilinoIDstring: string, ApartamentoIDstring: string, Mont: string, id: number): Observable<any> {
+    console.log(FechaInicio, FechaFin, InquilinoIDstring, ApartamentoIDstring, Mont, id);
     const url = 'http://127.0.0.1:8000/api/auth/contratoAlquilers/' + id;
     const InquilinoID = parseInt(InquilinoIDstring, 10);
     const ApartamentoID = parseInt(ApartamentoIDstring, 10);
+    const Monto = parseFloat(Mont);
     return this.http.put<any>(url, { FechaInicio, FechaFin, Monto, InquilinoID, ApartamentoID });
   }
 
@@ -198,6 +200,11 @@ export class CrudService {
 
   getApartamentos(): Observable<any> {
     const url = 'http://127.0.0.1:8000/api/auth/apartamentos';
+    return this.http.get<any>(url);
+  }
+
+  getApartamentosDisponibles(): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/auth/apartamentosDisponibles';
     return this.http.get<any>(url);
   }
 

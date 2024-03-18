@@ -38,7 +38,7 @@ export class ContratoCreateFormComponent {
         console.log(error);
       }
     });
-    this.crud.getApartamentos().subscribe({
+    this.crud.getApartamentosDisponibles().subscribe({
       next: (data) => {
         console.log(data);
         this.apartamentos = data;

@@ -57,7 +57,7 @@ export class ContratoUpdateFormComponent {
         console.log(error);
       }
     });
-    this.crud.getApartamentos().subscribe({
+    this.crud.getApartamentosDisponibles().subscribe({
       next: (data) => {
         console.log(data);
         this.apartamentos = data;
@@ -70,8 +70,8 @@ export class ContratoUpdateFormComponent {
   }
 
   update() {
-    const Fecha_Inicio = this.contratoForm.value.Fecha_Inicio ? new Date(this.contratoForm.value.Fecha_Inicio).toISOString().slice(0, 10) : undefined;
-    const Fecha_Fin = this.contratoForm.value.Fecha_Fin ? new Date(this.contratoForm.value.Fecha_Fin).toISOString().slice(0, 10) : undefined;
+    const Fecha_Inicio = this.contratoForm.controls['Fecha_Inicio'].value ? new Date(this.contratoForm.controls['Fecha_Inicio'].value).toISOString().slice(0, 10) : undefined;
+  const Fecha_Fin = this.contratoForm.controls['Fecha_Fin'].value ? new Date(this.contratoForm.controls['Fecha_Fin'].value).toISOString().slice(0, 10) : undefined;
     const InquilinoID = this.contratoForm.value.InquilinoID;
     const ApartamentoID = this.contratoForm.value.ApartamentoID;
     const Monto = this.contratoForm.value.Monto;
