@@ -27,7 +27,15 @@ export class EmpleadosComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
+    this.poleo();
+  }
 
+
+//Funcion para actualizar la tabla cada 20 segundos
+  poleo() {
+    setTimeout(() => {
+      this.obtenerDatos();
+  }, 20000);
   }
 
   actualizarElementos() {
