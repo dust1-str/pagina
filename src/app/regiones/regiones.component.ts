@@ -4,6 +4,8 @@ import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+
 
 @Component({
   selector: 'app-regiones',
@@ -26,37 +28,52 @@ export class RegionesComponent implements OnInit {
   constructor(private regionService: RegionService) { }
 
   ngOnInit(): void {
-
-
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
-    //Este wey con que lo descomentes ya tarda en hacer la peticion
-   // const eventSource = new EventSource('http://127.0.0.1:8000/api/sse');
+    setTimeout(() => {
+      console.log('Iniciando conexión SSE')
+      this.startSSE();
 
-   //Quita lo comentado para que veas como funciona el SSE(solo regresa true o false)
-
-    /*eventSource.onmessage = event => {
-      const data = JSON.parse(event.data);
-
-      console.log('SSE Mensaje: ', data);
-
-      if (event.data == true) {
-        console.log('SSE Cambios en la tabla:', data);
-        this.obtenerDatos();
-      }
-    };*/
+    }, 3000);
   }
-  
 
+ startSSE(): void {
+    const eventSource = new EventSourcePolyfill('http://127.0.0.1:8000/api/sse');
+    let reconnectInterval = 3000; 
 
+    eventSource.onmessage = event => {
+      const data = JSON.parse(event.data);
+      console.log('Modificaciones en la tabla:', data);
+
+      if (data == true) {
+        eventSource.close();
+    
+        this.obtenerDatos();
+    
+        setTimeout(() => {
+          console.log('Reconectando SSE...')
+          this.startSSE();
+        }, reconnectInterval);
+      }
+    };
+
+    eventSource.onerror = error => {
+      console.warn('Error en la conexión SSE:', error);
+      eventSource.close();
+
+      setTimeout(() => {
+        console.log('Reconectando SSE...')
+        this.startSSE();
+      }, reconnectInterval);
+    };
+  }
 
   actualizarElementos() {
     this.ngOnInit();
   }
 
   obtenerDatos() {
-    console.log("AAAAAAAA")
     this.regionService.obtenerElemento().subscribe(
       data => {
         this.elementos = data;

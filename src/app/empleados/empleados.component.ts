@@ -31,11 +31,12 @@ export class EmpleadosComponent implements OnInit {
   }
 
 
-//Funcion para actualizar la tabla cada 20 segundos
+//Funcion para actualizar la tabla cada 5 segundos
   poleo() {
     setTimeout(() => {
       this.obtenerDatos();
-  }, 20000);
+      this.poleo();
+  }, 5000);
   }
 
   actualizarElementos() {
