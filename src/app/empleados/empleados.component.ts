@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EmpleadoService } from '../Core/Services/empleado.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './empleados.component.html',
   styleUrls: ['./empleados.component.css']
 })
-export class EmpleadosComponent implements OnInit {
+export class EmpleadosComponent implements OnInit, OnDestroy {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre'];
   updateRoute: string = '/paises/update/';
@@ -21,6 +21,7 @@ export class EmpleadosComponent implements OnInit {
   backRoute: string = '/paises';
   rol_user: string = "3";
   catalogo: boolean = true;
+  private timerId: any;
 
   constructor(private empleadoService: EmpleadoService) { }
 
@@ -30,10 +31,15 @@ export class EmpleadosComponent implements OnInit {
     this.poleo();
   }
 
+  ngOnDestroy() {
+    if (this.timerId) {
+      clearTimeout(this.timerId);
+    }
+  }
 
 //Funcion para actualizar la tabla cada 5 segundos
   poleo() {
-    setTimeout(() => {
+    this.timerId = setTimeout(() => {
       this.obtenerDatos();
       this.poleo();
   }, 5000);

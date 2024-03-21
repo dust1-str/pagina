@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RegionService } from '../Core/Services/region.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -15,7 +15,7 @@ import { EventSourcePolyfill } from 'event-source-polyfill';
   styleUrl: './regiones.component.css'
 })
 
-export class RegionesComponent implements OnInit {
+export class RegionesComponent implements OnInit, OnDestroy {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre','Pais'];
   updateRoute: string = '/regiones/update/';
@@ -24,6 +24,8 @@ export class RegionesComponent implements OnInit {
   backRoute: string = '/regiones';  
   rol_user: string = "3";
   catalogo: boolean = true;
+  private eventSource!: EventSourcePolyfill;
+  private timerId: any;
 
   constructor(private regionService: RegionService) { }
 
@@ -31,38 +33,43 @@ export class RegionesComponent implements OnInit {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
-    setTimeout(() => {
+    this.timerId = setTimeout(() => {
       console.log('Iniciando conexión SSE')
       this.startSSE();
-
     }, 3000);
   }
 
+  ngOnDestroy() {
+    this.eventSource.close();
+    clearTimeout(this.timerId);
+    this.startSSE()
+  }
+
  startSSE(): void {
-    const eventSource = new EventSourcePolyfill('http://127.0.0.1:8000/api/sse');
+    this.eventSource = new EventSourcePolyfill('http://127.0.0.1:8000/api/sse');
     let reconnectInterval = 3000; 
 
-    eventSource.onmessage = event => {
+    this.eventSource.onmessage = event => {
       const data = JSON.parse(event.data);
       console.log('Modificaciones en la tabla:', data);
 
       if (data == true) {
-        eventSource.close();
+        this.eventSource.close();
     
         this.obtenerDatos();
     
-        setTimeout(() => {
+        this.timerId = setTimeout(() => {
           console.log('Reconectando SSE...')
           this.startSSE();
         }, reconnectInterval);
       }
     };
 
-    eventSource.onerror = error => {
+    this.eventSource.onerror = error => {
       console.warn('Error en la conexión SSE:', error);
-      eventSource.close();
+      this.eventSource.close();
 
-      setTimeout(() => {
+      this.timerId = setTimeout(() => {
         console.log('Reconectando SSE...')
         this.startSSE();
       }, reconnectInterval);

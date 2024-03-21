@@ -81,7 +81,7 @@ export class LoginComponent {
       localStorage.setItem('token', this.token);
       localStorage.setItem('role_id', this.role_id.toString());
       setTimeout(() => {
-        this.router.navigate(['/paises']);
+        this.router.navigate(['/inquilinos']);
         this.crud.emitLoginSuccessful();
       }, 1500);
     } else {
