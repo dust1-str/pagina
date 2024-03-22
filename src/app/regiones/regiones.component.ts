@@ -4,7 +4,8 @@ import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
-import { EventSourcePolyfill } from 'event-source-polyfill';
+import { ChangeDetectorRef } from '@angular/core';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -24,56 +25,42 @@ export class RegionesComponent implements OnInit, OnDestroy {
   backRoute: string = '/regiones';  
   rol_user: string = "3";
   catalogo: boolean = true;
-  private eventSource!: EventSourcePolyfill;
   private timerId: any;
 
-  constructor(private regionService: RegionService) { }
-
+  constructor(private regionService: RegionService, private ngZone: NgZone) { }
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
-
-    this.timerId = setTimeout(() => {
-      console.log('Iniciando conexión SSE')
-      this.startSSE();
-    }, 3000);
+    this.startSSE();
+    
   }
 
   ngOnDestroy() {
-    this.eventSource.close();
-    clearTimeout(this.timerId);
-    this.startSSE()
+    clearTimeout(this.timerId);  
   }
 
  startSSE(): void {
-    this.eventSource = new EventSourcePolyfill('http://127.0.0.1:8000/api/sse');
-    let reconnectInterval = 3000; 
 
-    this.eventSource.onmessage = event => {
-      const data = JSON.parse(event.data);
-      console.log('Modificaciones en la tabla:', data);
+    setTimeout(() => {
+      const eventSource = new EventSource('http://192.168.100.84:8000/api/sse');
 
-      if (data == true) {
-        this.eventSource.close();
-    
-        this.obtenerDatos();
-    
-        this.timerId = setTimeout(() => {
-          console.log('Reconectando SSE...')
-          this.startSSE();
-        }, reconnectInterval);
-      }
-    };
+      eventSource.onmessage = (event) => {
+        console.log(event.data);
+  
+        if(event.data == "true") {
+          console.log('Se ha actualizado la tabla')
+          eventSource.close();
 
-    this.eventSource.onerror = error => {
-      console.warn('Error en la conexión SSE:', error);
-      this.eventSource.close();
-
-      this.timerId = setTimeout(() => {
-        console.log('Reconectando SSE...')
-        this.startSSE();
-      }, reconnectInterval);
-    };
+          this.ngZone.run(() => {
+            this.obtenerDatos();
+          });
+          setTimeout(() => {
+            this.startSSE();
+          }, 10000);
+        }
+  
+      };
+    }, 2000);
   }
 
   actualizarElementos() {

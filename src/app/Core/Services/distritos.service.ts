@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Objeto } from '../Interfaces/objeto';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DistritosService {
-  private apiUrl = 'http://127.0.0.1:8000/api/auth/distritos';
+  private apiUrl = `${environment.API_BASE_URL}/distritos`;
 
   constructor(private http: HttpClient) { }
 

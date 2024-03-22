@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Objeto } from '../Interfaces/objeto';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegionService {
-  private apiUrl = 'http://127.0.0.1:8000/api/auth/regiones';
+  private apiUrl = `${environment.API_BASE_URL}/regiones`;
 
   constructor(private http: HttpClient) { }
 
