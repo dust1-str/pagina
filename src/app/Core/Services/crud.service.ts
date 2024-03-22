@@ -125,7 +125,7 @@ export class CrudService {
   }
 
   updateCiudad(Nombre: string, RegionIDstring: string, id: number): Observable<any> {
-    const url = 'http://192.168.123.104:8000/api/auth/ciudades/' + id;
+    const url = `${environment.API_BASE_URL}/ciudades/` + id;
     const RegionID = parseInt(RegionIDstring, 10);
     return this.http.put<any>(url, { Nombre, RegionID });
   }
