@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngIf="authStatus == true" class="dashboard-container2">
+    <div *ngIf="isNotLoginPage()" class="dashboard-container2">
         <app-dashboard (logoutEvent)="logout()" (rol)="ngOnInit()" ></app-dashboard>
     </div>
 

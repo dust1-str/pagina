@@ -64,5 +64,9 @@ export class AppComponent {
   navigateTo(table: string): void {
     this.router.navigate([table.toLowerCase()]);
   }
+
+  isNotLoginPage(): boolean {
+    return this.router.url !== '/login' && this.router.url !== '/register';
+  }
   
 }
