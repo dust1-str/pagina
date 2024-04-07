@@ -44,8 +44,8 @@ export class CiudadesComponent implements OnInit {
   }
   
   iniciarPusher() {
-    this.pusher = new pusherJs('15b9609bf288fff026dd', {
-      cluster: 'mt1',
+    this.pusher = new pusherJs('fb2cba6f8134ca70e39a', {
+      cluster: 'us3',
       forceTLS: false,
       wsHost: window.location.hostname,
       wsPort: 6001,
