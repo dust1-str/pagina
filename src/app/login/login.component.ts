@@ -48,6 +48,10 @@ export class LoginComponent {
           console.log(error.error.error);
           if (error.error.error === 'Unauthorized') {
             this.loginMessage = 'Error. Verifica tus credenciales.'
+          } else if (error.error.error === 'Email not verified') {
+            this.loginMessage = 'Verifica tu correo para iniciar sesión'
+          } else if (error.error.error === 'Deshabilitado') {
+            this.loginMessage = 'Su cuenta ha sido desactivada'
           }
           this.state = false;
         }

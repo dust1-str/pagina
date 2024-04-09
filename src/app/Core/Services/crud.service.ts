@@ -171,11 +171,12 @@ export class CrudService {
     return this.http.put<any>(url, { Nombre, EdificioID, Descripcion, Estado });
   }
 
-  updateUsuario(name: string, email: string, RoleIDstring: string, id: number): Observable<any> {
+  updateUsuario(name: string, email: string, RoleIDstring: string, id: number, is_active: number): Observable<any> {
     const url = `${environment.API_BASE_URL}/usuarios/` + id;
-
+    console.log(name, email, RoleIDstring, id, is_active);
     const role_id = parseInt(RoleIDstring, 10);
-    return this.http.put<any>(url, { name, email, role_id });
+    return this.http.put<any>(url, { name, email, role_id, is_active });
+
   }
 
   getRegiones(): Observable<any> {

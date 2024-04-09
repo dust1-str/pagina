@@ -11,7 +11,7 @@ export class RegisterUserService {
   constructor(private http: HttpClient) { }
 
   register(name: string, email: string, password: string): Observable<any> {
-    const url = 'http://192.168.123.104:8000/api/user/register';
+    const url = 'http://192.168.116.254:8000/api/user/register';
 
     return this.http.post<any>(url, { name, email, password });
   }

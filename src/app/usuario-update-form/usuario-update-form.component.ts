@@ -16,12 +16,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UsuarioUpdateFormComponent {
   roles: any[] = [];
+  isactive = [{
+    id: 1,
+    estado: 'activo'
+  }, {
+    id: 0,
+    estado: 'inactivo'
+  }];
   usuario: any;
   showPassword = new FormControl(false);
   usuarioForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     role_id: new FormControl('', Validators.required),
+    estadoControl: new FormControl('')
   });
 
   constructor(private crud: CrudService, private router: Router, private route: ActivatedRoute) { }
@@ -46,7 +54,8 @@ export class UsuarioUpdateFormComponent {
         this.usuarioForm.setValue({
           name: this.usuario.name,
           email: this.usuario.email,
-          role_id: this.usuario.role_id
+          role_id: this.usuario.role_id,
+          estadoControl: this.usuario.is_active
         });
       },
       error: error => {
@@ -60,11 +69,12 @@ export class UsuarioUpdateFormComponent {
     const name = this.usuarioForm.value.name;
     const email = this.usuarioForm.value.email;
     const role_id = this.usuarioForm.value.role_id;
+    const estado = this.usuarioForm.value.estadoControl;
     const idString = this.route.snapshot.paramMap.get('id');
     
-    if (name && email && role_id && idString) {
+    if (name && email && role_id && idString && estado) {
       const id = parseInt(idString, 10);
-      this.crud.updateUsuario(name, email, role_id, id).subscribe({
+      this.crud.updateUsuario(name, email, role_id, id, Number(estado)).subscribe({
         next: (data) => {
           console.log(data);
           this.router.navigate(['/home']);

@@ -42,7 +42,7 @@ export class RegionesComponent implements OnInit, OnDestroy {
  startSSE(): void {
 
     setTimeout(() => {
-      const eventSource = new EventSource('http://192.168.123.104:8000/api/sse');
+      const eventSource = new EventSource('http://192.168.116.254:8000/api/sse');
 
       eventSource.onmessage = (event) => {
         console.log(event.data);

@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit{
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre','Email','Rol'];
+  columnas: string[] = ['id', 'Nombre','Email','Rol', 'Estado'];
   updateRoute: string = '/usuarios/update/';
   createRoute: string = '/usuarios/create'; 
   deleteRoute: string = '/usuarios/';
@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit{
     this.usuarioService.obtenerElementos().subscribe(
       data => {
         this.elementos = data;
+        console.log('Elementos obtenidos:', this.elementos);
       },
       error => {
         console.error('Error al obtener empleados', error);

@@ -38,6 +38,13 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="form-label">Estado</label>
+                <select id="estadoControl" formControlName="estadoControl" class="form-input">
+                    <option *ngFor="let state of isactive" [value]="state.id">{{state.estado}}</option>
+                </select>
+            </div>
+
             <button type="submit" class="form-button">Actualizar</button>
             <div class="center">
                 <a routerLink="/home" class="back-button">Return</a>
