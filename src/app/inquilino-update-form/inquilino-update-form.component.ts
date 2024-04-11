@@ -60,7 +60,7 @@ export class InquilinoUpdateFormComponent {
       this.crud.updateInquilino(Nombre, Apellido, Telefono, Email, Cedula, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/inquilinos']);
+          this.router.navigate(['/inquilinos'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

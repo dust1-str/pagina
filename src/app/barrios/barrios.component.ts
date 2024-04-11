@@ -4,11 +4,13 @@ import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
+import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-barrios',
   standalone: true,
-  imports: [TableComponent,CommonModule,DashboardComponent],
+  imports: [TableComponent,CommonModule,DashboardComponent,FeedbackNotificationComponent],
   templateUrl: './barrios.component.html',
   styleUrl: './barrios.component.css'
 })
@@ -21,13 +23,21 @@ export class BarriosComponent implements OnInit {
   backRoute: string = '/barrios';
   rol_user: string = "3";
   catalogo: boolean = true;
+  method: string = '';
 
-  constructor(private barriosService: BarriosService) { }
+  constructor(private barriosService: BarriosService,private route: ActivatedRoute,private router: Router  ) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
 
+    this.route.queryParams.subscribe((params : any) => {
+      if (params.method) {
+        console.log('Metodo:', params.method);
+        this.method = params.method;
+        this.router.navigate([], { queryParams: {} });
+      }
+    });
   }
 
   actualizarElementos() {

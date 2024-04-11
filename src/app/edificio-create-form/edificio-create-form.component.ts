@@ -44,7 +44,8 @@ export class EdificioCreateFormComponent {
       this.crud.createEdificio(Nombre, CalleID).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/edificios']);
+          this.router.navigate(['/edificios'], { queryParams: { method: 'POST' } });        
+
         },
         error: error => {
           console.log(error);

@@ -62,7 +62,7 @@ export class EdificioUpdateFormComponent {
       this.crud.updateEdificio(Nombre, CalleID, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/edificios']);
+          this.router.navigate(['/edificios'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

@@ -1,0 +1,5 @@
+<div class="notification-container">
+    <div *ngIf="mostrar" [ngClass]="{'green-notification': method === 'POST', 'blue-notification': method === 'PUT', 'fade-out': fadeOut}">
+        <p>{{ method === 'POST' ? 'Elemento Insertado Correctamente!!!' : 'Elemento Editado Correctamente!!!' }}</p>
+    </div>
+</div>

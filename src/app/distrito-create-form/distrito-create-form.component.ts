@@ -44,7 +44,8 @@ export class DistritoCreateFormComponent {
       this.crud.createDistrito(Nombre, CiudadID).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/distritos']);
+          this.router.navigate(['/distritos'], { queryParams: { method: 'POST' } });        
+
         },
         error: error => {
           console.log(error);

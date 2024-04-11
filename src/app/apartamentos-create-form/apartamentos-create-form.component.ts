@@ -52,7 +52,8 @@ export class ApartamentosCreateFormComponent {
       this.crud.createApartamento(Nombre, Descripcion, EdificioID, Estado).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/apartamentos']);
+          this.router.navigate(['/apartamentos'], { queryParams: { method: 'POST' } });        
+
         },
         error: error => {
           console.log(error);

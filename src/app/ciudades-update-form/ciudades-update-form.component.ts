@@ -61,7 +61,7 @@ export class CiudadesUpdateFormComponent {
       this.crud.updateCiudad(Nombre, RegionID, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/ciudades']);
+          this.router.navigate(['/ciudades'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

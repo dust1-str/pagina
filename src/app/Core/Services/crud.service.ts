@@ -111,7 +111,7 @@ export class CrudService {
 
   updateContrato(Fecha_Inicio: string, Fecha_Final: string, InquilinoIDstring: string, ApartamentoIDstring: string, Mont: string, id: number): Observable<any> {
     console.log(Fecha_Inicio, Fecha_Final, InquilinoIDstring, ApartamentoIDstring, Mont, id);
-    const url = `${environment.API_BASE_URL}/contratoAlquilers` + id;
+    const url = `${environment.API_BASE_URL}/contratoAlquilers/` + id;
     const InquilinoID = parseInt(InquilinoIDstring, 10);
     const ApartamentoID = parseInt(ApartamentoIDstring, 10);
     const Monto = parseFloat(Mont);

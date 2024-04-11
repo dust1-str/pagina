@@ -83,7 +83,7 @@ export class ContratoUpdateFormComponent {
         this.crud.updateContrato(Fecha_Inicio, Fecha_Fin, InquilinoID, ApartamentoID, Monto, id).subscribe({
           next: (data) => {
             console.log(data);
-            this.router.navigate(['/contrato-alquiler']);
+            this.router.navigate(['/contrato-alquiler'], { queryParams: { method: 'PUT' } });        
           },
           error: error => {
             console.log(error);

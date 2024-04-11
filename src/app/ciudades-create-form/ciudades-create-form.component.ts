@@ -44,7 +44,8 @@ export class CiudadesCreateFormComponent {
       this.crud.createCiudad(Nombre, RegionID).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/ciudades']);
+          this.router.navigate(['/ciudades'], { queryParams: { method: 'POST' } });        
+
         },
         error: error => {
           console.log(error);

@@ -5,11 +5,13 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import pusherJs from 'pusher-js';
+import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ciudades',
   standalone: true,
-  imports: [TableComponent,CommonModule,DashboardComponent],
+  imports: [TableComponent,CommonModule,DashboardComponent,FeedbackNotificationComponent],
   templateUrl: './ciudades.component.html',
   styleUrl: './ciudades.component.css'
 })
@@ -24,12 +26,21 @@ export class CiudadesComponent implements OnInit {
   rol_user: string = "3";
   catalogo: boolean = true;
   pusher: any;
+  method :string = '';
 
-  constructor(private ciudadesService: CiudadesService) { }
+  constructor(private ciudadesService: CiudadesService,private route: ActivatedRoute,private router: Router ) { }
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
     this.iniciarPusher();
+
+    this.route.queryParams.subscribe((params : any) => {
+      if (params.method) {
+        console.log('Metodo:', params.method);
+        this.method = params.method;
+        this.router.navigate([], { queryParams: {} });
+      }
+    });
   }
   
   ngOnDestroy(): void {

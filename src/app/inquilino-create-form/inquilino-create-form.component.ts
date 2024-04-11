@@ -36,7 +36,7 @@ export class InquilinoCreateFormComponent {
       this.crud.createInquilino(Nombre, Apellido, Telefono, Email, Cedula).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/inquilinos']);
+          this.router.navigate(['/inquilinos'], { queryParams: { method: 'POST' } });        
         },
         error: error => {
           console.log(error);

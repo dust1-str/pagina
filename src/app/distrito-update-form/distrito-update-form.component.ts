@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './distrito-update-form.component.html',
-  styleUrl: './distrito-update-form.component.css'
+  styleUrl: '../update-form/update-form.component.css'
 })
 export class DistritoUpdateFormComponent {
   ciudades: any[] = [];
@@ -62,7 +62,7 @@ export class DistritoUpdateFormComponent {
       this.crud.updateDistrito(Nombre, CiudadID, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/distritos']);
+          this.router.navigate(['/distritos'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

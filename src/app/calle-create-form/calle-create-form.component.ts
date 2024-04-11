@@ -44,7 +44,7 @@ export class CalleCreateFormComponent {
       this.crud.createCalle(Nombre, BarrioID).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/calles']);
+          this.router.navigate(['/calles'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

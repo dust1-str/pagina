@@ -72,7 +72,7 @@ export class ApartamentosUpdateFormComponent {
       this.crud.updateApartamento(Nombre, Descripcion, EdificioID, Estado, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/apartamentos']);
+          this.router.navigate(['/apartamentos'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);
