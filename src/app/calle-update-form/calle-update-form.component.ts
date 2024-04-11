@@ -62,7 +62,8 @@ export class CalleUpdateFormComponent {
       this.crud.updateCalle(Nombre, BarrioID, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/calles']);
+          this.router.navigate(['/calles'], { queryParams: { method: 'POST' } });        
+
         },
         error: error => {
           console.log(error);

@@ -35,7 +35,7 @@ export class CreateFormComponent {
     this.crud.create(this.endpoint, this.createForm.value.Nombre).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/' + this.backRoute]);
+        this.router.navigate(['/' + this.backRoute], { queryParams: { method: 'POST' } });        
       },
       error: error => {
         console.log(error);

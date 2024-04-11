@@ -62,7 +62,7 @@ export class RegionesUpdateFormComponent {
       this.crud.updateRegion(Nombre, PaisID, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/regiones']);
+          this.router.navigate(['/regiones'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

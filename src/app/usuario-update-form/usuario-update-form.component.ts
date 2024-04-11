@@ -79,7 +79,8 @@ export class UsuarioUpdateFormComponent {
       this.crud.updateUsuario(name, email, role_id, id, Number(estado)).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home'], { queryParams: { method: 'PUT' } });        
+
         },
         error: error => {
           console.log(error);

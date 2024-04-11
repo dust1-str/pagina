@@ -44,7 +44,7 @@ export class RegionesCreateFormComponent {
       this.crud.createRegion(Nombre, PaisID).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/regiones']);
+          this.router.navigate(['/regiones'], { queryParams: { method: 'POST' } });        
         },
         error: error => {
           console.log(error);

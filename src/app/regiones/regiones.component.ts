@@ -1,17 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RegionService } from '../Core/Services/region.service';
+
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
 import { NgZone } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-regiones',
   standalone: true,
-  imports: [TableComponent,CommonModule,DashboardComponent],
+  imports: [TableComponent,CommonModule,DashboardComponent,FeedbackNotificationComponent],
   templateUrl: './regiones.component.html',
   styleUrl: './regiones.component.css'
 })
@@ -25,42 +29,51 @@ export class RegionesComponent implements OnInit, OnDestroy {
   backRoute: string = '/regiones';  
   rol_user: string = "3";
   catalogo: boolean = true;
-  private timerId: any;
+  private eventSource: EventSource | null;
+  method: string = '';
 
-  constructor(private regionService: RegionService, private ngZone: NgZone) { }
+  constructor(private regionService: RegionService, private ngZone: NgZone,private route: ActivatedRoute,private router: Router) { }
+
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
     this.startSSE();
-    
+
+    this.route.queryParams.subscribe((params : any) => {
+      if (params.method) {
+        console.log('Metodo:', params.method);
+        this.method = params.method;
+        this.router.navigate([], { queryParams: {} });
+      }
+    });
   }
 
-  ngOnDestroy() {
-    clearTimeout(this.timerId);  
+  ngOnDestroy(): void {
+    this.stopSSE();
   }
 
- startSSE(): void {
 
-    setTimeout(() => {
-      const eventSource = new EventSource('http://192.168.116.254:8000/api/sse');
+  startSSE(): void {
+    this.eventSource = new EventSource('http://127.0.0.1:8000/api/sse');
 
-      eventSource.onmessage = (event) => {
-        console.log(event.data);
-  
-        if(event.data == "true") {
-          console.log('Se ha actualizado la tabla')
-          eventSource.close();
+    this.eventSource.onmessage = (event) => {
+    console.log(event.data);
 
-          this.ngZone.run(() => {
-            this.obtenerDatos();
-          });
-          setTimeout(() => {
-            this.startSSE();
-          }, 10000);
-        }
-  
-      };
-    }, 2000);
+    if(event.data == "true") {
+
+      this.ngZone.run(() => {
+        this.obtenerDatos();
+      });
+    }
+
+  };  
+  }
+
+  stopSSE(): void {
+    if (this.eventSource) {
+      this.eventSource.close();
+      this.eventSource = null;
+    }
   }
 
   actualizarElementos() {
@@ -90,4 +103,5 @@ export class RegionesComponent implements OnInit, OnDestroy {
   agregarElemento(id: number) {
     console.log('se agregara un nuevo elemento ');
   }
+
 }

@@ -53,7 +53,7 @@ export class UpdateFormComponent {
     this.crud.update(this.endpoint, this.id, this.updateForm.value.Nombre).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/' + this.backRoute]);
+        this.router.navigate(['/' + this.backRoute], { queryParams: { method: 'PUT' } });        
       },
       error: error => {
         console.log(error);

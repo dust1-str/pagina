@@ -62,7 +62,7 @@ export class BarrioUpdateFormComponent {
       this.crud.updateBarrio(Nombre, DistritoID, id).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/barrios']);
+          this.router.navigate(['/barrios'], { queryParams: { method: 'PUT' } });        
         },
         error: error => {
           console.log(error);

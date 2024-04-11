@@ -4,13 +4,15 @@ import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
+import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TableComponent,CommonModule,DashboardComponent],
+  imports: [TableComponent,CommonModule,DashboardComponent,FeedbackNotificationComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -23,15 +25,24 @@ export class HomeComponent implements OnInit{
   backRoute: string = '/home';
   rol_user: string = "3";
   section_id: boolean = true;
+  method: string = '';
 
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService,private route: ActivatedRoute,private router: Router  ) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
     localStorage.removeItem('stop');
     localStorage.removeItem('userAct_id');
+
+    this.route.queryParams.subscribe((params : any) => {
+      if (params.method) {
+        console.log('Metodo:', params.method);
+        this.method = params.method;
+        this.router.navigate([], { queryParams: {} });
+      }
+    });
   }
 
   actualizarElementos() {

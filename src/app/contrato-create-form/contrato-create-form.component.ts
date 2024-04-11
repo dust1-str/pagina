@@ -61,7 +61,7 @@ export class ContratoCreateFormComponent {
       this.crud.createContrato(Fecha_Inicio, Fecha_Fin, InquilinoID, ApartamentoID, Monto).subscribe({
         next: (data) => {
           console.log(data);
-          this.router.navigate(['/contrato-alquiler']);
+          this.router.navigate(['/contrato-alquiler'], { queryParams: { method: 'POST' } });        
         },
         error: error => {
           console.log(error);

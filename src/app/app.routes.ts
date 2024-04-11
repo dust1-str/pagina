@@ -5,7 +5,6 @@ export const routes: Routes = [
     { path: 'login', loadComponent:()=>import('./login/login.component').then(m=>m.LoginComponent)},
     { path: 'home', loadComponent:()=>import('./home/home.component').then(m=>m.HomeComponent), canActivate: [authGuard]},
     { path: 'register', loadComponent:()=>import('./register-user/register-user.component').then(m=>m.RegisterUserComponent)},
-    { path: 'home', loadComponent:()=>import('./home/home.component').then(m=>m.HomeComponent), canActivate: [authGuard]},
     { path: 'paises' , loadComponent:()=>import('./empleados/empleados.component').then(m=>m.EmpleadosComponent), canActivate: [authGuard]},
     { path: 'paises/update/:id' , loadComponent:()=>import('./paises-update-form/paises-update-form.component').then(m=>m.PaisesUpdateFormComponent), canActivate: [authGuard]},
     { path: 'paises/create' , loadComponent:()=>import('./paises-create-form/paises-create-form.component').then(m=>m.PaisesCreateFormComponent), canActivate: [authGuard]},
@@ -40,6 +39,8 @@ export const routes: Routes = [
     {path: 'usuarios/update/:id', loadComponent:()=>import('./usuario-update-form/usuario-update-form.component').then(m=>m.UsuarioUpdateFormComponent), canActivate: [authGuard]},
     { path: 'logs', loadComponent:()=>import('./logs/logs.component').then(m=>m.LogsComponent), canActivate: [authGuard]},
 
-    { path: '', redirectTo: '/inquilinos', pathMatch: 'full' }
+    { path: '', redirectTo: '/inquilinos', pathMatch: 'full' },
+    { path: '**', redirectTo: '/inquilinos' }
+
 
 ];
