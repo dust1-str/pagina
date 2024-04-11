@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RegionService } from '../Core/Services/region.service';
-
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TableComponent } from '../table/table.component';
@@ -22,51 +21,55 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class RegionesComponent implements OnInit, OnDestroy {
   elementos: Objeto[] = [];
-  columnas: string[] = ['id', 'Nombre','Pais'];
+  columnas: string[] = ['id', 'Nombre', 'Pais'];
   updateRoute: string = '/regiones/update/';
-  createRoute: string = '/regiones/create'; 
+  createRoute: string = '/regiones/create';
   deleteRoute: string = '/regiones/';
-  backRoute: string = '/regiones';  
-  rol_user: string = "3";
+  backRoute: string = '/regiones';
+  rol_user: string = '3';
   catalogo: boolean = true;
   private eventSource: EventSource | null;
+  private regionSubscription: Subscription | null;
   method: string = '';
 
-  constructor(private regionService: RegionService, private ngZone: NgZone,private route: ActivatedRoute,private router: Router) { }
+  constructor(
+    private regionService: RegionService,
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.stopSSE();
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
-    this.startSSE();
-
-    this.route.queryParams.subscribe((params : any) => {
+    
+    this.route.queryParams.subscribe((params: any) => {
       if (params.method) {
         console.log('Metodo:', params.method);
         this.method = params.method;
         this.router.navigate([], { queryParams: {} });
       }
     });
+    this.startSSE();
   }
 
   ngOnDestroy(): void {
     this.stopSSE();
   }
 
-
   startSSE(): void {
     this.eventSource = new EventSource('http://127.0.0.1:8000/api/sse');
 
     this.eventSource.onmessage = (event) => {
-    console.log(event.data);
+      console.log(event.data);
 
-    if(event.data == "true") {
-
-      this.ngZone.run(() => {
-        this.obtenerDatos();
-      });
-    }
-
-  };  
+      if (event.data == 'true') {
+        this.ngZone.run(() => {
+          this.obtenerDatos();
+        });
+      }
+    };
   }
 
   stopSSE(): void {
@@ -74,19 +77,23 @@ export class RegionesComponent implements OnInit, OnDestroy {
       this.eventSource.close();
       this.eventSource = null;
     }
+    if (this.regionSubscription) {
+      this.regionSubscription.unsubscribe();
+      this.regionSubscription = null;
+    }
   }
-
-  actualizarElementos() {
-    this.ngOnInit();
-  }
-
+  
   obtenerDatos() {
-    this.regionService.obtenerElemento().subscribe(
-      data => {
+    if (this.regionSubscription) {
+      this.regionSubscription.unsubscribe();
+    }
+
+    this.regionSubscription = this.regionService.obtenerElemento().subscribe(
+      (data) => {
         this.elementos = data;
-        console.log('Regiones obtenidas:', data)
+        console.log('Regiones obtenidas:', data);
       },
-      error => {
+      (error) => {
         console.error('Error al obtener regiones', error);
       }
     );
@@ -99,9 +106,12 @@ export class RegionesComponent implements OnInit, OnDestroy {
   eliminarElemento(id: number) {
     console.log('Eliminar elemento con ID:', id);
   }
-  
+
   agregarElemento(id: number) {
     console.log('se agregara un nuevo elemento ');
   }
 
+  actualizarElementos() {
+    this.obtenerDatos();
+  }
 }

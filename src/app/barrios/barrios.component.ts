@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BarriosService } from '../Core/Services/barrios.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -6,6 +6,7 @@ import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-barrios',
@@ -14,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './barrios.component.html',
   styleUrl: './barrios.component.css'
 })
-export class BarriosComponent implements OnInit {
+export class BarriosComponent implements OnInit, OnDestroy{
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Distrito']; 
   updateRoute: string = '/barrios/update/';
@@ -23,6 +24,7 @@ export class BarriosComponent implements OnInit {
   backRoute: string = '/barrios';
   rol_user: string = "3";
   catalogo: boolean = true;
+  private barriosSubscription: Subscription | null = null;
   method: string = '';
 
   constructor(private barriosService: BarriosService,private route: ActivatedRoute,private router: Router  ) { }
@@ -40,17 +42,28 @@ export class BarriosComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.barriosSubscription) {
+      this.barriosSubscription.unsubscribe();
+    }
+  }
+
   actualizarElementos() {
-    this.ngOnInit();
+    this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.barriosService.obtenerElemento().subscribe(
-      data => {
+    if (this.barriosSubscription) {
+      this.barriosSubscription.unsubscribe();
+    }
+
+    this.barriosSubscription = this.barriosService.obtenerElemento().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Barrios obtenidos:', data);
       },
-      error => {
-        console.error('Error al obtener elementos', error);
+      (error: any) => {
+        console.error('Error al obtener barrios', error);
       }
     );
   }

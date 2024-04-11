@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApartamentosService } from '../Core/Services/apartamentos.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -6,6 +6,8 @@ import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-apartamentos',
   standalone: true,
@@ -13,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './apartamentos.component.html',
   styleUrl: './apartamentos.component.css'
 })
-export class ApartamentosComponent implements OnInit {
+export class ApartamentosComponent implements OnInit, OnDestroy {
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Descripcion', 'Edificio', 'Estado']; 
   updateRoute: string = '/apartamentos/update/';
@@ -21,6 +23,7 @@ export class ApartamentosComponent implements OnInit {
   deleteRoute: string = '/apartamentos/';
   backRoute: string = '/apartamentos';
   rol_user: string = "3";
+  private apartamentosSubscription: Subscription | null = null;
   method: string = '';
 
   constructor(private apartamentosService: ApartamentosService,private route: ActivatedRoute,private router: Router  ) { }
@@ -38,17 +41,28 @@ export class ApartamentosComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.apartamentosSubscription) {
+      this.apartamentosSubscription.unsubscribe();
+    }
+  }
+
   actualizarElementos() {
-    this.ngOnInit();
+    this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.apartamentosService.obtenerElemento().subscribe(
-      data => {
+    if (this.apartamentosSubscription) {
+      this.apartamentosSubscription.unsubscribe();
+    }
+
+    this.apartamentosSubscription = this.apartamentosService.obtenerElemento().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Apartamentos obtenidos:', data);
       },
-      error => {
-        console.error('Error al obtener elementos', error);
+      (error: any) => {
+        console.error('Error al obtener apartamentos', error);
       }
     );
   }

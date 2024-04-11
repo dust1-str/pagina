@@ -260,7 +260,7 @@ export class CrudService {
   }
 
   getCiudad(id: string): Observable<any> {
-    const url = `${environment.API_BASE_URL}/roles/` + id;
+    const url = `${environment.API_BASE_URL}/ciudades/` + id;
     return this.http.get<any>(url);
   }
 

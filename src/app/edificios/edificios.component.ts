@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EdificiosService } from '../Core/Services/edificios.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -6,6 +6,8 @@ import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-edificios',
   standalone: true,
@@ -13,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './edificios.component.html',
   styleUrl: './edificios.component.css'
 })
-export class EdificiosComponent implements OnInit {
+export class EdificiosComponent implements OnInit, OnDestroy {
 
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre','Calle']; 
@@ -23,6 +25,7 @@ export class EdificiosComponent implements OnInit {
   backRoute: string = '/edificios';
   rol_user: string = "3";
   catalogo: boolean = false;
+  private edificiosSubscription: Subscription | null = null;
   method: string = '';
 
   constructor(private edificiosService: EdificiosService,private route: ActivatedRoute,private router: Router  ) { }
@@ -40,17 +43,28 @@ export class EdificiosComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.edificiosSubscription) {
+      this.edificiosSubscription.unsubscribe();
+    }
+  }
+
   actualizarElementos() {
     this.ngOnInit();
   }
 
   obtenerDatos() {
-    this.edificiosService.obtenerElemento().subscribe(
-      data => {
+    if (this.edificiosSubscription) {
+      this.edificiosSubscription.unsubscribe();
+    }
+
+    this.edificiosSubscription = this.edificiosService.obtenerElemento().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Edificios obtenidos:', data);
       },
-      error => {
-        console.error('Error al obtener elementos', error);
+      (error: any) => {
+        console.error('Error al obtener edificios', error);
       }
     );
   }

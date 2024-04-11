@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import pusherJs from 'pusher-js';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ciudades',
@@ -26,6 +27,7 @@ export class CiudadesComponent implements OnInit {
   rol_user: string = "3";
   catalogo: boolean = true;
   pusher: any;
+  private ciudadesSubscription: Subscription | null = null;
   method :string = '';
 
   constructor(private ciudadesService: CiudadesService,private route: ActivatedRoute,private router: Router ) { }
@@ -47,11 +49,14 @@ export class CiudadesComponent implements OnInit {
     if (this.pusher) {
       this.pusher.disconnect();
     }
+    if (this.ciudadesSubscription) {
+      this.ciudadesSubscription.unsubscribe();
+    }
   }
 
   actualizarElementos() 
   { 
-    this.ngOnInit(); 
+    this.obtenerDatos(); 
   }
   
   iniciarPusher() {
@@ -73,12 +78,17 @@ export class CiudadesComponent implements OnInit {
   }
   
   obtenerDatos() {
-    this.ciudadesService.obtenerElemento().subscribe(
-      data => {
+    if (this.ciudadesSubscription) {
+      this.ciudadesSubscription.unsubscribe();
+    }
+
+    this.ciudadesSubscription = this.ciudadesService.obtenerElemento().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Ciudades obtenidas:', data);
       },
-      error => {
-        console.error('Error al obtener elementos', error);
+      (error: any) => {
+        console.error('Error al obtener ciudades', error);
       }
     );
   }

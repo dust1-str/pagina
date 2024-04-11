@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsuarioService } from '../Core/Services/usuario.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -6,8 +6,7 @@ import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
-
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, OnDestroy{
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre','Email','Rol', 'Estado'];
   updateRoute: string = '/usuarios/update/';
@@ -25,6 +24,7 @@ export class HomeComponent implements OnInit{
   backRoute: string = '/home';
   rol_user: string = "3";
   section_id: boolean = true;
+  private usuarioSubscription: Subscription | null = null;
   method: string = '';
 
 
@@ -45,17 +45,27 @@ export class HomeComponent implements OnInit{
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.usuarioSubscription) {
+      this.usuarioSubscription.unsubscribe();
+    }
+  }
+
   actualizarElementos() {
-    this.ngOnInit();
+    this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.usuarioService.obtenerElementos().subscribe(
-      data => {
+    if (this.usuarioSubscription) {
+      this.usuarioSubscription.unsubscribe();
+    }
+
+    this.usuarioSubscription = this.usuarioService.obtenerElementos().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
         console.log('Elementos obtenidos:', this.elementos);
       },
-      error => {
+      (error: any) => {
         console.error('Error al obtener empleados', error);
       }
     );

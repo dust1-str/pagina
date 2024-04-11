@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InquilinosService } from '../Core/Services/inquilinos.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -6,6 +6,7 @@ import { TableComponent } from '../table/table.component';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { CommonModule } from '@angular/common';
 import { Router,ActivatedRoute} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-inquilinos',
@@ -14,7 +15,7 @@ import { Router,ActivatedRoute} from '@angular/router';
   templateUrl: './inquilinos.component.html',
   styleUrl: './inquilinos.component.css'
 })
-export class InquilinosComponent implements OnInit{
+export class InquilinosComponent implements OnInit, OnDestroy{
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Nombre', 'Apellido', 'Telefono', 'Email','Cedula']; 
   updateRoute: string = '/inquilinos/update/';
@@ -22,6 +23,7 @@ export class InquilinosComponent implements OnInit{
   deleteRoute: string = '/inquilinos/';
   backRoute: string = '/inquilinos';
   rol_user: string = "3";
+  private inquilinosSubscription: Subscription | null = null;
   method: string = '';
 
   constructor(private inquilinosService: InquilinosService,private route: ActivatedRoute,private router: Router) { }
@@ -38,20 +40,30 @@ export class InquilinosComponent implements OnInit{
       }
     });
   }
-  
+
+  ngOnDestroy(): void {
+    if (this.inquilinosSubscription) {
+      this.inquilinosSubscription.unsubscribe();
+    }
+  }
 
 
   actualizarElementos() {
-    this.ngOnInit();
+    this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.inquilinosService.obtenerElemento().subscribe(
-      data => {
+    if (this.inquilinosSubscription) {
+      this.inquilinosSubscription.unsubscribe();
+    }
+
+    this.inquilinosSubscription = this.inquilinosService.obtenerElemento().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Inquilinos obtenidos:', data);
       },
-      error => {
-        console.error('Error al obtener elementos', error);
+      (error: any) => {
+        console.error('Error al obtener inquilinos', error);
       }
     );
   }

@@ -6,6 +6,7 @@ import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-empleados',
@@ -23,32 +24,35 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
   backRoute: string = '/paises';
   rol_user: string = "3";
   catalogo: boolean = true;
-  private timerId: any;
+  private empleadoSubscription: Subscription | null = null;
+  timerId: any;
   method: string = '';
 
-  constructor(private empleadoService: EmpleadoService,private route: ActivatedRoute,private router: Router) { }
+  constructor(private empleadoService: EmpleadoService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
-    this.poleo();
 
-    this.route.queryParams.subscribe((params : any) => {
+    this.route.queryParams.subscribe((params: any) => {
       if (params.method) {
         console.log('Metodo:', params.method);
         this.method = params.method;
         this.router.navigate([], { queryParams: {} });
       }
     });
+    this.poleo();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+    if (this.empleadoSubscription) {
+      this.empleadoSubscription.unsubscribe();
+    }
     if (this.timerId) {
       clearTimeout(this.timerId);
     }
   }
 
-//Funcion para actualizar la tabla cada 5 segundos
   poleo() {
     this.timerId = setTimeout(() => {
       this.obtenerDatos();
@@ -56,16 +60,17 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
   }, 5000);
   }
 
-  actualizarElementos() {
-    this.ngOnInit();
-  }
-
   obtenerDatos() {
-    this.empleadoService.obtenerEmpleados().subscribe(
-      data => {
+    if (this.empleadoSubscription) {
+      this.empleadoSubscription.unsubscribe();
+    }
+
+    this.empleadoSubscription = this.empleadoService.obtenerEmpleados().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Empleados obtenidos:', data);
       },
-      error => {
+      (error: any) => {
         console.error('Error al obtener empleados', error);
       }
     );
@@ -80,6 +85,10 @@ export class EmpleadosComponent implements OnInit, OnDestroy {
   }
 
   agregarElemento(id: number) {
-    console.log('se agregara un nuevo elemento ');
+    console.log('Agregar nuevo elemento');
+  }
+
+  actualizarElementos() {
+    this.obtenerDatos();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ContratoAlquilerService } from '../Core/Services/contrato-alquiler.service';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -6,6 +6,7 @@ import { TableComponent } from '../table/table.component';
 import { CommonModule } from '@angular/common';
 import { FeedbackNotificationComponent } from '../feedback-notification/feedback-notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contrato-alquiler',
@@ -14,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './contrato-alquiler.component.html',
   styleUrl: './contrato-alquiler.component.css'
 })
-export class ContratoAlquilerComponent implements OnInit{
+export class ContratoAlquilerComponent implements OnInit, OnDestroy{
   elementos: Objeto[] = [];
   columnas: string[] = ['id', 'Fecha_Inicio', 'Fecha_Final', 'Inquilino', 'Apartamento','Monto'];
   updateRoute: string = '/contratoAlquilers/update/';
@@ -22,6 +23,7 @@ export class ContratoAlquilerComponent implements OnInit{
   deleteRoute: string = '/contratoAlquilers/';
   backRoute: string = '/contratoAlquilers'; 
   rol_user: string = "3";
+  private contratoAlquilerSubscription: Subscription | null = null;
   method: string = '';
 
   constructor(private contratoAlquilerService: ContratoAlquilerService,private route: ActivatedRoute,private router: Router) { }
@@ -40,17 +42,28 @@ export class ContratoAlquilerComponent implements OnInit{
 
   }
 
+  ngOnDestroy(): void {
+    if (this.contratoAlquilerSubscription) {
+      this.contratoAlquilerSubscription.unsubscribe();
+    }
+  }
+
   actualizarElementos() {
-    this.ngOnInit();
+    this.obtenerDatos();
   }
 
   obtenerDatos() {
-    this.contratoAlquilerService.obtenerElemento().subscribe(
-      data => {
+    if (this.contratoAlquilerSubscription) {
+      this.contratoAlquilerSubscription.unsubscribe();
+    }
+
+    this.contratoAlquilerSubscription = this.contratoAlquilerService.obtenerElemento().subscribe(
+      (data: Objeto[]) => {
         this.elementos = data;
+        console.log('Contratos de alquiler obtenidos:', data);
       },
-      error => {
-        console.error('Error al obtener elementos', error);
+      (error: any) => {
+        console.error('Error al obtener contratos de alquiler', error);
       }
     );
   }

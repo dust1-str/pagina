@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter,OnInit, AfterViewChecked, ViewChild, ElementRef  } from '@angular/core';
+import { Component, Input, Output, EventEmitter,OnInit, AfterViewChecked, ViewChild, ElementRef, OnDestroy  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Objeto } from '../Core/Interfaces/objeto';
 import { Router,RouterLink } from '@angular/router';
 import { InteractionsService } from '../Core/Services/interactions.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-logs',
@@ -11,9 +12,10 @@ import { InteractionsService } from '../Core/Services/interactions.service';
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.css'
 })
-export class LogsComponent {
+export class LogsComponent implements OnInit, OnDestroy{
 elementos: Objeto[] = [];
 @ViewChild('logsContainer') private logsContainer!: ElementRef;
+private logSubscription: Subscription | null;
 
 constructor(private router: Router,private interactionsService: InteractionsService) { }
 
@@ -22,12 +24,24 @@ ngOnInit(): void {
   this.obtenerDatos();
 }
 
+ngOnDestroy(): void {
+  if (this.logSubscription) {
+    this.logSubscription.unsubscribe();
+  }
+}
+
+
 obtenerDatos() {
-  this.interactionsService.obtenerElemento().subscribe(
-    data => {
+
+  if (this.logSubscription) {
+    this.logSubscription.unsubscribe();
+  }
+
+  this.logSubscription = this.interactionsService.obtenerElemento().subscribe(
+    (data) => {
       this.elementos = data;
     },
-    error => {
+    (error) => {
       console.error('Error al obtener elementos', error);
     }
   );
