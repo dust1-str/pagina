@@ -244,6 +244,11 @@ export class CrudService {
     return this.http.get<any>(url);
   }
 
+  me(): Observable<any> {
+    const url = `${environment.API_BASE_URL}/me`;
+    return this.http.post<any>(url, {});
+  }
+
   getPais(id: string): Observable<any> {
     const url = `${environment.API_BASE_URL}/paises/` + id;
     return this.http.get<any>(url);

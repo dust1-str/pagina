@@ -54,7 +54,7 @@ export class AppComponent {
     } else {
         this.authMessage = 'Rol no definido';
         this.authStatus = false;
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
     }
     localStorage.setItem('auth', this.authStatus.toString());
     console.log(this.authStatus);

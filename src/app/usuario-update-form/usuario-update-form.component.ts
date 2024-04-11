@@ -74,6 +74,8 @@ export class UsuarioUpdateFormComponent {
     
     if (name && email && role_id && idString && estado) {
       const id = parseInt(idString, 10);
+      localStorage.setItem('userAct_id', idString);
+      localStorage.setItem('stop', 'false');
       this.crud.updateUsuario(name, email, role_id, id, Number(estado)).subscribe({
         next: (data) => {
           console.log(data);

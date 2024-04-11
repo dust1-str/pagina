@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.obtenerDatos();
     this.rol_user = localStorage.getItem('role_id') || this.rol_user;
+    localStorage.removeItem('stop');
+    localStorage.removeItem('userAct_id');
   }
 
   actualizarElementos() {
